@@ -95,7 +95,18 @@ class GetAttivatiTest {
     @Test
     @DisplayName("doPost chiama super.doPost senza errori")
     void testDoPost() throws Exception {
+        // StringWriter per intercettare l'output della servlet
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter writer = new PrintWriter(stringWriter);
+        when(response.getWriter()).thenReturn(writer);
+
         // Chiamata al metodo doPost ereditato da HttpServlet
         servlet.callDoPost(request, response);
+
+        writer.flush();
+
+        // Assertion: nessun output prodotto
+        assertEquals("", stringWriter.toString());
     }
+
 }

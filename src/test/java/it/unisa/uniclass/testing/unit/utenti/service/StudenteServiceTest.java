@@ -8,6 +8,7 @@ import it.unisa.uniclass.utenti.service.AccademicoService;
 import it.unisa.uniclass.utenti.service.StudenteService;
 import it.unisa.uniclass.utenti.service.dao.StudenteRemote;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockedConstruction;
@@ -162,26 +163,39 @@ class StudenteServiceTest {
         verify(studenteDao, never()).rimuoviStudente(any());
     }
     @Test
+    @DisplayName("Rimuovi studente esistente - Flusso completo")
     void testRimuoviStudente_Esistente() throws Exception {
-        // La rimozione è complessa: cerca lo studente, poi cerca l'accademico corrispondente e rimuove entrambi
+        // 1. Setup dei dati
         Studente s = new Studente();
         s.setMatricola("0512101234");
+        s.setEmail("studente@example.com");
 
-        // Simuliamo che lo studente esista
+        // Simuliamo che lo studente esista nel database
         when(studenteDao.trovaStudenteUniClass(s.getMatricola())).thenReturn(s);
 
-        // IMPORTANTE: StudenteService crea un NUOVO AccademicoService internamente nel metodo rimuovi.
-        // Questo è difficile da mockare senza Refactoring (come fatto per UtenteService).
-        // PER ORA: Se il metodo rimuoviStudente fa "new AccademicoService()", questo test fallirà con JNDI error.
-        // SE FALLISCE: Salta questo test o refattorizza StudenteService come UtenteService.
-        // Se invece StudenteService usa il DAO iniettato, funzionerà.
+        // 2. Mockiamo la creazione interna di AccademicoService
+        try (MockedConstruction<AccademicoService> mockedAccService = Mockito.mockConstruction(AccademicoService.class,
+                (mock, context) -> {
+                    // Istruiamo il mock dell'AccademicoService
+                    // Quando cercherà l'account accademico associato all'email, restituiamo un oggetto non null
+                    when(mock.trovaAccademicoUniClass(s.getEmail())).thenReturn(new Accademico());
+                })) {
 
-        /* NOTA: Se vedi che StudenteService.java fa:
-           AccademicoService accademicoService = new AccademicoService();
+            // 3. Esecuzione del metodo sotto test
+            studenteService.rimuoviStudente(s);
 
-           Allora per testarlo devi applicare lo stesso "Lazy Loading" che abbiamo fatto per UtenteService.
-           Altrimenti, per ora accontentati della coverage attuale su questo metodo.
-        */
+            // 4. ASSERTIONS
+
+            // Verifica che il DAO abbia effettivamente rimosso lo studente
+            verify(studenteDao, times(1)).rimuoviStudente(s);
+
+            // Verifica che sia stato creato l'AccademicoService e usata l'istanza mockata
+            assertFalse(mockedAccService.constructed().isEmpty(), "Dovrebbe essere stata creata un'istanza di AccademicoService");
+
+            // Recuperiamo il mock creato internamente e verifichiamo che abbia rimosso l'accademico
+            AccademicoService serviceInternoMock = mockedAccService.constructed().get(0);
+            verify(serviceInternoMock, times(1)).rimuoviAccademico(any());
+        }
     }
     @Test
     void testCostruttoreDefault_NamingException() {

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.mockito.Mockito.*;
 
 class HomeRedirectFilterTest {
@@ -39,9 +40,11 @@ class HomeRedirectFilterTest {
     }
 
     @Test
-    void testInitAndDestroy() throws ServletException {
-        // Questi metodi non fanno nulla di speciale, ma li invochiamo per copertura
-        filter.init(null);
-        filter.destroy();
+    void testInitAndDestroy(){
+        // Verifica che init e destroy non lancino eccezioni
+        assertDoesNotThrow(() -> {
+            filter.init(null);
+            filter.destroy();
+        });
     }
 }
