@@ -1,11 +1,9 @@
 package it.unisa.uniclass.utenti.model;
 
 import jakarta.persistence.*;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import static it.unisa.uniclass.utenti.model.PersonaleTA.*;
 
 /**
  * Classe che rappresenta un membro del personale tecnico-amministrativo (TA).
@@ -80,8 +78,8 @@ public class PersonaleTA extends Utente implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == id;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == id; //NOSONAR
       @*/
     public long getId() {
         return id;
@@ -94,8 +92,8 @@ public class PersonaleTA extends Utente implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == telefono;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == telefono; //NOSONAR
       @*/
     public /*@ nullable */ String getTelefono() {
         return telefono;
@@ -108,8 +106,8 @@ public class PersonaleTA extends Utente implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable this.telefono;
-      @ ensures this.telefono == telefono;
+      @ assignable this.telefono; //NOSONAR
+      @ ensures this.telefono == telefono; //NOSONAR
       @*/
     public void setTelefono(String telefono) {
         this.telefono = telefono;

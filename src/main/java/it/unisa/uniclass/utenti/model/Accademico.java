@@ -3,14 +3,11 @@ package it.unisa.uniclass.utenti.model;
 import it.unisa.uniclass.conversazioni.model.Messaggio;
 import it.unisa.uniclass.orari.model.CorsoLaurea;
 import jakarta.persistence.*;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import static it.unisa.uniclass.utenti.model.Accademico.*;
 
 /**
  * Rappresenta un accademico all'interno del sistema.
@@ -124,8 +121,8 @@ public class Accademico extends Utente implements Serializable {
      */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == attivato;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == attivato; //NOSONAR
       @*/
     public boolean isAttivato() {
         return attivato;
@@ -138,8 +135,8 @@ public class Accademico extends Utente implements Serializable {
      */
     /*@
       @ public normal_behavior
-      @ assignable this.attivato;
-      @ ensures this.attivato == attivato;
+      @ assignable this.attivato; //NOSONAR
+      @ ensures this.attivato == attivato; //NOSONAR
       @*/
     public void setAttivato(boolean attivato) {
         this.attivato = attivato;
@@ -152,8 +149,8 @@ public class Accademico extends Utente implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == iscrizione;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == iscrizione; //NOSONAR
       @*/
     public /*@ nullable */ LocalDate getIscrizione() {
         return iscrizione;
@@ -166,8 +163,8 @@ public class Accademico extends Utente implements Serializable {
     */
     /*@
       @ public normal_behavior
-      @ assignable this.iscrizione;
-      @ ensures this.iscrizione == iscrizione;
+      @ assignable this.iscrizione; //NOSONAR
+      @ ensures this.iscrizione == iscrizione; //NOSONAR
       @*/
     public void setIscrizione(LocalDate iscrizione) {
         this.iscrizione = iscrizione;
@@ -180,8 +177,8 @@ public class Accademico extends Utente implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == corsoLaurea;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == corsoLaurea; //NOSONAR
       @*/
     public /*@ nullable */ CorsoLaurea getCorsoLaurea() {
         return corsoLaurea;
@@ -193,8 +190,8 @@ public class Accademico extends Utente implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable this.corsoLaurea;
-      @ ensures this.corsoLaurea == corsoLaurea;
+      @ assignable this.corsoLaurea; //NOSONAR
+      @ ensures this.corsoLaurea == corsoLaurea; //NOSONAR
       @*/
     public void setCorsoLaurea(CorsoLaurea corsoLaurea) {
         this.corsoLaurea = corsoLaurea;
@@ -207,8 +204,8 @@ public class Accademico extends Utente implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == matricola;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == matricola; //NOSONAR
       @*/
     public /*@ nullable */ String getMatricola() {
         return matricola;
@@ -224,8 +221,8 @@ public class Accademico extends Utente implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable this.matricola;
-      @ ensures this.matricola == matricola;
+      @ assignable this.matricola; //NOSONAR
+      @ ensures this.matricola == matricola; //NOSONAR
       @*/
     public void setMatricola(String matricola) {
         this.matricola = matricola;
@@ -239,8 +236,8 @@ public class Accademico extends Utente implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == messaggiInviati;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == messaggiInviati; //NOSONAR
       @*/
     public /*@ nullable */ Set<Messaggio> getMessaggiInviati() {
         return messaggiInviati;
@@ -253,8 +250,8 @@ public class Accademico extends Utente implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable this.messaggiInviati;
-      @ ensures this.messaggiInviati == messaggiInviati;
+      @ assignable this.messaggiInviati; //NOSONAR
+      @ ensures this.messaggiInviati == messaggiInviati; //NOSONAR
       @*/
     public void setMessaggiInviati(Set<Messaggio> messaggiInviati) {
         this.messaggiInviati = messaggiInviati;
@@ -266,8 +263,8 @@ public class Accademico extends Utente implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == messaggiRicevuti;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == messaggiRicevuti; //NOSONAR
       @*/
     public /*@ nullable */ Set<Messaggio> getMessaggiRicevuti() {
         return messaggiRicevuti;
@@ -280,8 +277,8 @@ public class Accademico extends Utente implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable this.messaggiRicevuti;
-      @ ensures this.messaggiRicevuti == messaggiRicevuti;
+      @ assignable this.messaggiRicevuti; //NOSONAR
+      @ ensures this.messaggiRicevuti == messaggiRicevuti; //NOSONAR
       @*/
     public void setMessaggiRicevuti(Set<Messaggio> messaggiRicevuti) {
         this.messaggiRicevuti = messaggiRicevuti;

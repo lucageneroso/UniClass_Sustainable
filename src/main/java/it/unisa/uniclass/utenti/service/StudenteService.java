@@ -28,9 +28,9 @@ public class StudenteService {
      */
     public StudenteService() {
         try {
-            InitialContext ctx = new InitialContext();
+            final InitialContext ctx = new InitialContext();
             studenteDao = (StudenteRemote) ctx.lookup("java:global/UniClass-Dependability/StudenteDAO");
-        } catch (NamingException e) {
+        } catch (final NamingException e) {
             throw new RuntimeException("Errore durante il lookup di StudenteDAO", e);
         }
     }
@@ -49,10 +49,10 @@ public class StudenteService {
      * @param matricola La matricola dello studente da cercare.
      * @return L'oggetto Studente corrispondente alla matricola.
      */
-    public Studente trovaStudenteUniClass(String matricola) {
+    public Studente trovaStudenteUniClass(final String matricola) {
         try {
             return studenteDao.trovaStudenteUniClass(matricola);
-        } catch (NoResultException e) {
+        } catch (final NoResultException e) {
             return null;
         }
     }
@@ -63,7 +63,7 @@ public class StudenteService {
      * @param corsoLaurea Il corso di laurea di cui trovare gli studenti.
      * @return Una lista di oggetti Studente associati al corso di laurea.
      */
-    public List<Studente> trovaStudentiCorso(CorsoLaurea corsoLaurea) {
+    public final List<Studente> trovaStudentiCorso(final CorsoLaurea corsoLaurea) {
         return studenteDao.trovaStudentiCorso(corsoLaurea);
     }
 
@@ -82,10 +82,10 @@ public class StudenteService {
      * @param email L'email dello studente da cercare.
      * @return L'oggetto Studente corrispondente all'email.
      */
-    public Studente trovaStudenteEmailUniClass(String email) {
+    public Studente trovaStudenteEmailUniClass(final String email) {
         try {
             return studenteDao.trovaStudenteEmailUniClass(email);
-        } catch (NoResultException e) {
+        } catch (final NoResultException e) {
             return null;
         }
     }
@@ -98,9 +98,9 @@ public class StudenteService {
      * @throws AlreadyExistentUserException Se l'utente è già presente nel database.
      * @throws NotFoundUserException Se l'utente non è stato trovato.
      */
-    public void aggiungiStudente(Studente studente) throws IncorrectUserSpecification, NotFoundUserException, AlreadyExistentUserException {
-        Studente trovaStudenteEmailUniClass = trovaStudenteEmailUniClass(studente.getEmail());
-        Studente trovaStudenteUniClass = trovaStudenteUniClass(studente.getMatricola());
+    public void aggiungiStudente(final Studente studente) throws IncorrectUserSpecification, NotFoundUserException, AlreadyExistentUserException {
+        final Studente trovaStudenteEmailUniClass = trovaStudenteEmailUniClass(studente.getEmail());
+        final Studente trovaStudenteUniClass = trovaStudenteUniClass(studente.getMatricola());
 
         if ((trovaStudenteEmailUniClass == null) && (trovaStudenteUniClass == null)) {
             studenteDao.aggiungiStudente(studente);
@@ -115,10 +115,10 @@ public class StudenteService {
      * @param studente Lo studente da rimuovere.
      * @throws NotFoundUserException Se l'utente non è stato trovato.
      */
-    public void rimuoviStudente(Studente studente) throws NotFoundUserException {
+    public void rimuoviStudente(final Studente studente) throws NotFoundUserException {
         if (trovaStudenteUniClass(studente.getMatricola()) != null) {
-            AccademicoService accademicoService = new AccademicoService();
-            Accademico accademico = accademicoService.trovaAccademicoUniClass(studente.getMatricola());
+            final AccademicoService accademicoService = new AccademicoService();
+            final Accademico accademico = accademicoService.trovaAccademicoUniClass(studente.getMatricola());
             studenteDao.rimuoviStudente(studente);
             accademicoService.rimuoviAccademico(accademico);
         } else {

@@ -20,16 +20,16 @@ import java.util.List;
 @Stateless
 public class CoordinatoreService {
 
-    private CoordinatoreRemote coordinatoreDao;
+    private final CoordinatoreRemote coordinatoreDao;
 
     /**
      * Costruttore di default che esegue il lookup JNDI del DAO.
      */
     public CoordinatoreService() {
         try {
-            InitialContext ctx = new InitialContext();
+            final InitialContext ctx = new InitialContext();
             coordinatoreDao = (CoordinatoreRemote) ctx.lookup("java:global/UniClass-Dependability/CoordinatoreDAO");
-        } catch (NamingException e) {
+        } catch (final NamingException e) {
             throw new RuntimeException("Errore durante il lookup di CoordinatoreDAO", e);
         }
     }
@@ -47,10 +47,10 @@ public class CoordinatoreService {
      * @param matricola La matricola del coordinatore da cercare.
      * @return L'oggetto Coordinatore corrispondente alla matricola.
      */
-    public Coordinatore trovaCoordinatoreUniClass(String matricola) {
+    public Coordinatore trovaCoordinatoreUniClass(final String matricola) {
         try {
             return coordinatoreDao.trovaCoordinatoreUniClass(matricola);
-        } catch (NoResultException e) {
+        } catch (final NoResultException e) {
             return null;
         }
     }
@@ -61,7 +61,7 @@ public class CoordinatoreService {
      * @param nomeCorsoLaurea Il nome del corso di laurea di cui trovare i coordinatori.
      * @return Una lista di oggetti Coordinatore associati al corso di laurea.
      */
-    public List<Coordinatore> trovaCoordinatoriCorsoLaurea(String nomeCorsoLaurea) {
+    public final List<Coordinatore> trovaCoordinatoriCorsoLaurea(final String nomeCorsoLaurea) {
         return coordinatoreDao.trovaCoordinatoriCorsoLaurea(nomeCorsoLaurea);
     }
 
@@ -71,10 +71,10 @@ public class CoordinatoreService {
      * @param email L'email del coordinatore da cercare.
      * @return L'oggetto Coordinatore corrispondente all'email.
      */
-    public Coordinatore trovaCoordinatoreEmailUniclass(String email) {
+    public Coordinatore trovaCoordinatoreEmailUniclass(final String email) {
         try {
             return coordinatoreDao.trovaCoordinatoreEmailUniclass(email);
-        } catch (NoResultException e) {
+        } catch (final NoResultException e) {
             return null;
         }
     }
@@ -96,9 +96,9 @@ public class CoordinatoreService {
      * @throws AlreadyExistentUserException Se l'utente è già presente nel database.
      * @throws NotFoundUserException Se l'utente non è stato trovato.
      */
-    public void aggiungiCoordinatore(Coordinatore coordinatore) throws IncorrectUserSpecification, AlreadyExistentUserException, NotFoundUserException {
-        Coordinatore trovaCoordinatoreEmailUniClass = coordinatoreDao.trovaCoordinatoreEmailUniclass(coordinatore.getEmail());
-        Coordinatore trovaCoordinatoreUniClass = coordinatoreDao.trovaCoordinatoreUniClass(coordinatore.getMatricola());
+    public void aggiungiCoordinatore(final Coordinatore coordinatore) throws IncorrectUserSpecification, AlreadyExistentUserException, NotFoundUserException {
+        final Coordinatore trovaCoordinatoreEmailUniClass = coordinatoreDao.trovaCoordinatoreEmailUniclass(coordinatore.getEmail());
+        final Coordinatore trovaCoordinatoreUniClass = coordinatoreDao.trovaCoordinatoreUniClass(coordinatore.getMatricola());
 
         if ((trovaCoordinatoreUniClass == trovaCoordinatoreEmailUniClass) &&
                 (trovaCoordinatoreUniClass == null)) {
@@ -114,10 +114,10 @@ public class CoordinatoreService {
      * @param coordinatore Il coordinatore da rimuovere.
      * @throws NotFoundUserException Se l'utente non è stato trovato.
      */
-    public void rimuoviCoordinatore(Coordinatore coordinatore) throws NotFoundUserException {
+    public void rimuoviCoordinatore(final Coordinatore coordinatore) throws NotFoundUserException {
         if (trovaCoordinatoreEmailUniclass(coordinatore.getEmail()) != null) {
-            AccademicoService accademicoService = new AccademicoService();
-            Accademico accademico = accademicoService.trovaAccademicoUniClass(coordinatore.getMatricola());
+            final AccademicoService accademicoService = new AccademicoService();
+            final Accademico accademico = accademicoService.trovaAccademicoUniClass(coordinatore.getMatricola());
             coordinatoreDao.rimuoviCoordinatore(coordinatore);
             accademicoService.rimuoviAccademico(accademico);
         } else {

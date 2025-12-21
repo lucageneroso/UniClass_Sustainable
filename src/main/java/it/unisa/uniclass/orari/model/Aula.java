@@ -4,10 +4,8 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import static it.unisa.uniclass.orari.model.Aula.*;
 
 /**
  * Classe che rappresenta un'Aula universitaria, con informazioni relative a edificio, nome e relazioni con lezioni e appelli.
@@ -83,11 +81,11 @@ public class Aula implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \everything;
-      @ ensures this.id == id;
-      @ ensures this.edificio == edificio;
-      @ ensures this.nome == nome;
-      @ ensures true;
+      @ assignable \everything; //NOSONAR
+      @ ensures this.id == id; //NOSONAR
+      @ ensures this.edificio == edificio; //NOSONAR
+      @ ensures this.nome == nome; //NOSONAR
+      @ ensures true; //NOSONAR
       @*/
     public Aula(int id, String edificio, String nome) {
         this.id = id;
@@ -99,9 +97,9 @@ public class Aula implements Serializable {
      * Costruttore di default per creare un'istanza vuota di Aula.
      * */
     /*@
-      @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures true;
+      @ public normal_behavior //NOSONAR
+      @ assignable \nothing; //NOSONAR
+      @ ensures true; //NOSONAR
       @*/
     public Aula() {}
 
@@ -112,8 +110,8 @@ public class Aula implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == id;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == id; //NOSONAR
       @*/
     public int getId() {
         return id;
@@ -126,8 +124,8 @@ public class Aula implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == lezioni;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == lezioni; //NOSONAR
       @*/
     public /*@ nullable */ List<Lezione> getLezioni() {
         return lezioni;
@@ -140,8 +138,8 @@ public class Aula implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == edificio;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == edificio; //NOSONAR
       @*/
     public /*@ nullable */ String getEdificio() {
         return edificio;
@@ -154,8 +152,8 @@ public class Aula implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == nome;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == nome; //NOSONAR
       @*/
     public /*@ nullable */ String getNome() {
         return nome;
@@ -167,8 +165,8 @@ public class Aula implements Serializable {
      * @param edificio Nome dell'edificio
      * */
     /*@ public normal_behavior
-      @ assignable this.edificio;
-      @ ensures this.edificio == edificio;
+      @ assignable this.edificio; //NOSONAR
+      @ ensures this.edificio == edificio; //NOSONAR
       @*/
     public void setEdificio(String edificio) {
         this.edificio = edificio;
@@ -180,8 +178,8 @@ public class Aula implements Serializable {
      * @param nome Nome dell'aula.
      * */
     /*@ public normal_behavior
-      @ assignable this.nome;
-      @ ensures this.nome == nome;
+      @ assignable this.nome; //NOSONAR
+      @ ensures this.nome == nome; //NOSONAR
       @*/
     public void setNome(String nome) {
         this.nome = nome;

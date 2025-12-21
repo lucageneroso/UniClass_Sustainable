@@ -125,8 +125,8 @@ public class Docente extends Accademico implements Serializable {
     // NOSONAR: JML specification, not commented-out code
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == lezioni;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == lezioni; //NOSONAR
       @*/
     public /*@ nullable */ List<Lezione> getLezioni() {
         return lezioni;
@@ -140,8 +140,8 @@ public class Docente extends Accademico implements Serializable {
     // NOSONAR: JML specification, not commented-out code
     /*@
       @ public normal_behavior
-      @ assignable this.lezioni;
-      @ ensures this.lezioni == lezioni;
+      @ assignable this.lezioni; //NOSONAR
+      @ ensures this.lezioni == lezioni; //NOSONAR
       @*/
     public void setLezioni(List<Lezione> lezioni) {
         this.lezioni = lezioni;
@@ -154,8 +154,8 @@ public class Docente extends Accademico implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == dipartimento;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == dipartimento; //NOSONAR
       @*/
     public /*@ nullable */ String getDipartimento() {
         return dipartimento;
@@ -168,8 +168,8 @@ public class Docente extends Accademico implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable this.dipartimento;
-      @ ensures this.dipartimento == dipartimento;
+      @ assignable this.dipartimento; //NOSONAR
+      @ ensures this.dipartimento == dipartimento; //NOSONAR
       @*/
     public void setDipartimento(String dipartimento) {
         this.dipartimento = dipartimento;
@@ -183,8 +183,8 @@ public class Docente extends Accademico implements Serializable {
     // NOSONAR: JML specification, not commented-out code
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == corsi;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == corsi; //NOSONAR
       @*/
     public /*@ nullable */ List<Corso> getCorsi() {
         return corsi;
@@ -198,8 +198,8 @@ public class Docente extends Accademico implements Serializable {
     // NOSONAR: JML specification, not commented-out code
     /*@
       @ public normal_behavior
-      @ assignable this.corsi;
-      @ ensures this.corsi == corsi;
+      @ assignable this.corsi; //NOSONAR
+      @ ensures this.corsi == corsi; //NOSONAR
       @*/
     public void setCorsi(List<Corso> corsi) {
         this.corsi = corsi;

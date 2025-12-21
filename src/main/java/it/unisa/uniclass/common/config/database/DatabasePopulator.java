@@ -1,11 +1,7 @@
 package it.unisa.uniclass.common.config.database;
 
-import it.unisa.uniclass.common.security.CredentialSecurity;
 import it.unisa.uniclass.orari.model.*;
-import it.unisa.uniclass.utenti.model.Docente;
-import it.unisa.uniclass.utenti.model.PersonaleTA;
-import it.unisa.uniclass.utenti.model.Studente;
-import it.unisa.uniclass.utenti.model.Tipo;
+
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.sql.DataSourceDefinition;
 import jakarta.ejb.LocalBean;
@@ -13,9 +9,10 @@ import jakarta.ejb.Singleton;
 import jakarta.ejb.Startup;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Time;
-import java.time.LocalDate;
 
 @Singleton
 @Startup
@@ -29,6 +26,8 @@ import java.time.LocalDate;
 @LocalBean
 public class DatabasePopulator {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(DatabasePopulator.class);
+
     // ✅ Costanti per valori duplicati
     private static final String CORSO_INFORMATICA = "Informatica";
 
@@ -40,15 +39,15 @@ public class DatabasePopulator {
     private static final String TIME_1530 = "15:30:00";
     private static final String TIME_1730 = "17:30:00";
 
-    @Inject
+    @Inject //NOSONAR
     private EntityManager em;
 
     @PostConstruct
     public void popola() {
-        System.out.println("AAAAAA");
+        LOGGER.info("AAAAAA");
         popolaDBUniversity();
         popolaDBUniClass();
-        System.out.println("BBBBBB");
+        LOGGER.info("BBBBBB");
     }
 
     public void popolaDBUniClass() {
@@ -113,7 +112,7 @@ public class DatabasePopulator {
         anno3.getCorsi().add(corso2);
         anno3.getCorsi().add(corso3);
 
-        // ✅ Esempio di sostituzione con costanti
+        // Lezioni
         Lezione lezione1 = new Lezione();
         lezione1.setCorso(corso1);
         lezione1.setGiorno(Giorno.LUNEDI);
@@ -162,9 +161,7 @@ public class DatabasePopulator {
         lezione6.setOraFine(Time.valueOf(TIME_1730));
         lezione6.setSemestre(1);
 
-        // ... continua con tutte le altre lezioni sostituendo i duplicati con le costanti ...
-
-        // Persistenza degli oggetti (rimane invariata)
+        // Persistenza
         em.persist(anno1);
         em.persist(anno2);
         em.persist(anno3);
@@ -173,13 +170,11 @@ public class DatabasePopulator {
         em.persist(corso1);
         em.persist(corso2);
         em.persist(corso3);
-        // ... persist degli altri oggetti ...
         em.flush();
         em.clear();
     }
 
     public void popolaDBUniversity() {
         // Metodo lasciato vuoto intenzionalmente per futuri sviluppi
-        // throw new UnsupportedOperationException("Non ancora implementato");
     }
 }

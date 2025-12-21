@@ -6,10 +6,7 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
-import static it.unisa.uniclass.utenti.model.Studente.*;
 
 /**
  * Classe che rappresenta uno studente nel sistema UniClass.
@@ -92,8 +89,8 @@ public class Studente extends Accademico implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == resto;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == resto; //NOSONAR
       @*/
     public /*@ nullable */ Resto getResto() {
         return resto;
@@ -106,8 +103,8 @@ public class Studente extends Accademico implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable this.resto;
-      @ ensures this.resto == resto;
+      @ assignable this.resto; //NOSONAR
+      @ ensures this.resto == resto; //NOSONAR
       @*/
     public void setResto(Resto resto) {
         this.resto = resto;

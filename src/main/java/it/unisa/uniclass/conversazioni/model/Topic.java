@@ -76,8 +76,8 @@ public class Topic implements Serializable {
      * @return il nome del topic
      */
     /*@ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == nome;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == nome; //NOSONAR
       @*/
     public /*@ nullable */ String getNome() {
         return nome;
@@ -90,8 +90,8 @@ public class Topic implements Serializable {
      */
     /*@
         @ public normal_behavior
-        @ assignable this.nome;
-        @ ensures this.nome == nome;
+        @ assignable this.nome; //NOSONAR
+        @ ensures this.nome == nome; //NOSONAR
       @*/
     public void setNome(String nome) {
         this.nome = nome;
@@ -104,8 +104,8 @@ public class Topic implements Serializable {
      */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == corsoLaurea;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == corsoLaurea; //NOSONAR
       @*/
     public /*@ nullable */ CorsoLaurea getCorsoLaurea() {
         return corsoLaurea;
@@ -118,8 +118,8 @@ public class Topic implements Serializable {
      */
     /*@
       @ public normal_behavior
-      @ assignable this.corsoLaurea;
-      @ ensures this.corsoLaurea == corsoLaurea;
+      @ assignable this.corsoLaurea; //NOSONAR
+      @ ensures this.corsoLaurea == corsoLaurea; //NOSONAR
       @*/
     public void setCorsoLaurea(CorsoLaurea corsoLaurea) {
         this.corsoLaurea = corsoLaurea;
@@ -132,8 +132,8 @@ public class Topic implements Serializable {
      */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == corso;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == corso; //NOSONAR
       @*/
     public /*@ nullable */ Corso getCorso() {
         return corso;
@@ -146,8 +146,8 @@ public class Topic implements Serializable {
      */
     /*@
       @ public normal_behavior
-      @ assignable this.corso;
-      @ ensures this.corso == corso;
+      @ assignable this.corso; //NOSONAR
+      @ ensures this.corso == corso; //NOSONAR
       @*/
     public void setCorso(Corso corso) {
         this.corso = corso;
@@ -160,8 +160,8 @@ public class Topic implements Serializable {
      */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == id;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == id; //NOSONAR
       @*/
     public /*@ nullable */ Long getId() {
         return id;

@@ -20,16 +20,16 @@ import java.util.List;
 @Stateless
 public class DocenteService {
 
-    private DocenteRemote docenteDao;
+    private final DocenteRemote docenteDao;
 
     /**
      * Costruttore di default che esegue il lookup JNDI del DAO.
      */
     public DocenteService() {
         try {
-            InitialContext ctx = new InitialContext();
+            final InitialContext ctx = new InitialContext();
             docenteDao = (DocenteRemote) ctx.lookup("java:global/UniClass-Dependability/DocenteDAO");
-        } catch (NamingException e) {
+        } catch (final NamingException e) {
             throw new RuntimeException("Errore durante il lookup di DocenteDAO", e);
         }
     }
@@ -60,10 +60,10 @@ public class DocenteService {
      * @param matricola La matricola del docente da cercare.
      * @return L'oggetto Docente corrispondente alla matricola.
      */
-    public Docente trovaDocenteUniClass(String matricola) {
+    public Docente trovaDocenteUniClass(final String matricola) {
         try {
             return docenteDao.trovaDocenteUniClass(matricola);
-        } catch (NoResultException e) {
+        } catch (final NoResultException e) {
             return null;
         }
     }
@@ -74,7 +74,7 @@ public class DocenteService {
      * @param nomeCorsoLaurea Il nome del corso di laurea di cui trovare i docenti.
      * @return Una lista di oggetti Docente associati al corso di laurea.
      */
-    public List<Docente> trovaDocenteCorsoLaurea(String nomeCorsoLaurea) {
+    public List<Docente> trovaDocenteCorsoLaurea(final String nomeCorsoLaurea) {
         return docenteDao.trovaDocenteCorsoLaurea(nomeCorsoLaurea);
     }
 
@@ -93,10 +93,10 @@ public class DocenteService {
      * @param email L'email del docente da cercare.
      * @return L'oggetto Docente corrispondente all'email.
      */
-    public Docente trovaEmailUniClass(String email) {
+    public Docente trovaEmailUniClass(final String email) {
         try {
             return docenteDao.trovaEmailUniClass(email);
-        } catch (NoResultException e) {
+        } catch (final NoResultException e) {
             return null;
         }
     }
@@ -109,9 +109,9 @@ public class DocenteService {
      * @throws AlreadyExistentUserException Se l'utente è già presente nel database.
      * @throws NotFoundUserException Se l'utente non è stato trovato.
      */
-    public void aggiungiDocente(Docente docente) throws IncorrectUserSpecification, NotFoundUserException, AlreadyExistentUserException {
-        Docente trovaEmailUniclass = docenteDao.trovaEmailUniClass(docente.getEmail());
-        Docente trovaDocenteUniClass = docenteDao.trovaDocenteUniClass(docente.getMatricola());
+    public void aggiungiDocente(final Docente docente) throws IncorrectUserSpecification, NotFoundUserException, AlreadyExistentUserException {
+        final Docente trovaEmailUniclass = docenteDao.trovaEmailUniClass(docente.getEmail());
+        final Docente trovaDocenteUniClass = docenteDao.trovaDocenteUniClass(docente.getMatricola());
         if ((trovaEmailUniclass == null) && (trovaDocenteUniClass == null)) {
             docenteDao.aggiungiDocente(docente);
         } else if (trovaEmailUniclass != trovaDocenteUniClass) {
@@ -125,10 +125,10 @@ public class DocenteService {
      * @param docente Il docente da rimuovere.
      * @throws NotFoundUserException Se l'utente non è stato trovato.
      */
-    public void rimuoviDocente(Docente docente) throws NotFoundUserException {
+    public void rimuoviDocente(final Docente docente) throws NotFoundUserException {
         if (trovaDocenteUniClass(docente.getMatricola()) != null) {
-            AccademicoService service = getAccademicoService(); // usa helper
-            Accademico accademico = service.trovaAccademicoUniClass(docente.getMatricola());
+            final AccademicoService service = getAccademicoService(); // usa helper
+            final Accademico accademico = service.trovaAccademicoUniClass(docente.getMatricola());
             docenteDao.rimuoviDocente(docente);
             service.rimuoviAccademico(accademico);
         } else {

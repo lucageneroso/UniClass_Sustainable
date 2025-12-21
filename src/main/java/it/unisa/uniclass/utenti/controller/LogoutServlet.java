@@ -12,26 +12,26 @@ public class LogoutServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+    protected void doGet(final HttpServletRequest request, final HttpServletResponse response) {
         try {
-            HttpSession session = request.getSession(false);
+            final HttpSession session = request.getSession(false);
             if (session != null) {
                 session.invalidate();
             }
 
             response.sendRedirect(request.getContextPath() + "/Home");
-        } catch (IOException e) {
+        } catch (final IOException e) {
             request.getServletContext().log("Error processing logout request", e);
             try {
                 response.sendRedirect(request.getContextPath() + "/Home");
-            } catch (IOException ioException) {
+            } catch (final IOException ioException) {
                 request.getServletContext().log("Failed to redirect after logout error", ioException);
             }
         }
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+    protected void doPost(final HttpServletRequest request, final HttpServletResponse response) {
         doGet(request, response);
     }
 }

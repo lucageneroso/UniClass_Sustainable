@@ -19,23 +19,23 @@ import java.util.List;
 public class getResto extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+    protected void doGet(final HttpServletRequest request, final HttpServletResponse response) {
         try {
-            PrintWriter printWriter = response.getWriter();
+            final PrintWriter printWriter = response.getWriter();
 
-            String corsoLaurea = request.getParameter("corsoLaurea");
-            CorsoLaureaService corsoLaureaService = new CorsoLaureaService();
-            CorsoLaurea corsoL = corsoLaureaService.trovaCorsoLaurea(corsoLaurea);
+            final String corsoLaurea = request.getParameter("corsoLaurea");
+            final CorsoLaureaService corsoLaureaService = new CorsoLaureaService();
+            final CorsoLaurea corsoL = corsoLaureaService.trovaCorsoLaurea(corsoLaurea);
 
-            JSONArray jsonArray = new JSONArray();
+            final JSONArray jsonArray = new JSONArray();
 
-            RestoService restoService = new RestoService();
+            final RestoService restoService = new RestoService();
 
-            List<Resto> resti = restoService.trovaRestiCorsoLaurea(corsoL);
+            final List<Resto> resti = restoService.trovaRestiCorsoLaurea(corsoL);
 
 
-            for(Resto resto : resti) {
-                JSONObject restoJson = new JSONObject();
+            for(final Resto resto : resti) {
+                final JSONObject restoJson = new JSONObject();
                 restoJson.put("id", resto.getId());
                 restoJson.put("nome", resto.getNome());
                 jsonArray.put(restoJson);
@@ -47,17 +47,17 @@ public class getResto extends HttpServlet {
 
             printWriter.println(jsonArray.toString());
             printWriter.flush();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             request.getServletContext().log("Error processing getResto request", e);
             try {
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred processing your request");
-            } catch (IOException ioException) {
+            } catch (final IOException ioException) {
                 request.getServletContext().log("Failed to send error response", ioException);
             }
         }
     }
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+    protected void doPost(final HttpServletRequest request, final HttpServletResponse response) {
         doGet(request, response);
     }
 

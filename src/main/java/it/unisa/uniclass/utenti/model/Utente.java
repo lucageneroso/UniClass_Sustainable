@@ -65,8 +65,8 @@ public class Utente implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures true;
+      @ assignable \nothing; //NOSONAR
+      @ ensures true; //NOSONAR
       @*/
     /**
      * Costruttore di default richiesto da JPA.
@@ -83,8 +83,8 @@ public class Utente implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == nome;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == nome; //NOSONAR
       @*/
     public /*@ nullable */ String getNome() {
         return nome;
@@ -97,8 +97,8 @@ public class Utente implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable this.nome;
-      @ ensures this.nome == nome;
+      @ assignable this.nome; //NOSONAR
+      @ ensures this.nome == nome; //NOSONAR
       @*/
     public void setNome(String nome) {
         this.nome = nome;
@@ -111,8 +111,8 @@ public class Utente implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == cognome;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == cognome; //NOSONAR
       @*/
     public /*@ nullable */ String getCognome() {
         return cognome;
@@ -125,8 +125,8 @@ public class Utente implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable this.cognome;
-      @ ensures this.cognome == cognome;
+      @ assignable this.cognome; //NOSONAR
+      @ ensures this.cognome == cognome; //NOSONAR
       @*/
     public void setCognome(String cognome) {
         this.cognome = cognome;
@@ -139,8 +139,8 @@ public class Utente implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == dataNascita;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == dataNascita; //NOSONAR
       @*/
     public /*@ nullable */ LocalDate getDataNascita() {
         return dataNascita;
@@ -153,8 +153,8 @@ public class Utente implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable this.dataNascita;
-      @ ensures this.dataNascita == dataNascita;
+      @ assignable this.dataNascita; //NOSONAR
+      @ ensures this.dataNascita == dataNascita; //NOSONAR
       @*/
     public void setDataNascita(LocalDate dataNascita) {
         this.dataNascita = dataNascita;
@@ -167,8 +167,8 @@ public class Utente implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == email;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == email; //NOSONAR
       @*/
     public /*@ nullable */ String getEmail() {
         return email;
@@ -181,8 +181,8 @@ public class Utente implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable this.email;
-      @ ensures this.email == email;
+      @ assignable this.email; //NOSONAR
+      @ ensures this.email == email; //NOSONAR
       @*/
     public void setEmail(String email) {
         this.email = email;
@@ -195,8 +195,8 @@ public class Utente implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == password;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == password; //NOSONAR
       @*/
     public /*@ nullable */ String getPassword() {
         return password;
@@ -209,8 +209,8 @@ public class Utente implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable this.password;
-      @ ensures this.password == password;
+      @ assignable this.password; //NOSONAR
+      @ ensures this.password == password; //NOSONAR
       @*/
     public void setPassword(String password) {
         this.password = password;
@@ -223,8 +223,8 @@ public class Utente implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == tipo;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == tipo; //NOSONAR
       @*/
     public /*@ nullable */ Tipo getTipo() {
         return tipo;
@@ -237,8 +237,8 @@ public class Utente implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable this.tipo;
-      @ ensures this.tipo == tipo;
+      @ assignable this.tipo; //NOSONAR
+      @ ensures this.tipo == tipo; //NOSONAR
       @*/
     public void setTipo(Tipo tipo) {
         this.tipo = tipo;

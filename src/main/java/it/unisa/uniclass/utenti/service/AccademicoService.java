@@ -16,7 +16,7 @@ import java.util.List;
 @Stateless
 public class AccademicoService {
 
-    private AccademicoRemote accademicoDao;
+    private final AccademicoRemote accademicoDao;
 
     /**
      * Costruttore di default che esegue il lookup JNDI del DAO.
@@ -24,9 +24,9 @@ public class AccademicoService {
     public AccademicoService() {
         try {
             System.out.println(" ATTENZIONE: Sto facendo la lookup JNDI del DAO! ");
-            InitialContext ctx = new InitialContext();
+            final InitialContext ctx = new InitialContext();
             accademicoDao = (AccademicoRemote) ctx.lookup("java:global/UniClass-Dependability/AccademicoDAO");
-        } catch (NamingException e) {
+        } catch (final NamingException e) {
             throw new RuntimeException("Errore durante il lookup di AccademicoDAO", e);
         }
     }
@@ -46,10 +46,10 @@ public class AccademicoService {
      * @param matricola La matricola dell'accademico da cercare.
      * @return L'oggetto Accademico corrispondente alla matricola.
      */
-    public Accademico trovaAccademicoUniClass(String matricola) {
+    public Accademico trovaAccademicoUniClass(final String matricola) {
         try {
             return accademicoDao.trovaAccademicoUniClass(matricola);
-        } catch (NoResultException e) {
+        } catch (final NoResultException e) {
             return null;
         }
     }
@@ -61,9 +61,9 @@ public class AccademicoService {
      * @param pass La password dell'accademico da cercare.
      * @return L'oggetto Accademico corrispondente all'email e alla password.
      */
-    public Accademico trovaEmailPassUniclass(String email, String pass) {
+    public Accademico trovaEmailPassUniclass(final String email, final String pass) {
         try {
-            Accademico accademico = accademicoDao.trovaEmailUniClass(email);
+            final Accademico accademico = accademicoDao.trovaEmailUniClass(email);
             if (accademico != null) {
                 if (accademico.getPassword() == null || accademico.getPassword().equals(pass)) {
                     return accademico;
@@ -73,7 +73,7 @@ public class AccademicoService {
             } else {
                 return null;
             }
-        } catch (NoResultException e) {
+        } catch (final NoResultException e) {
             return null;
         }
     }
@@ -93,10 +93,10 @@ public class AccademicoService {
      * @param email L'email dell'accademico da cercare.
      * @return L'oggetto Accademico corrispondente all'email.
      */
-    public Accademico trovaEmailUniClass(String email) {
+    public Accademico trovaEmailUniClass(final String email) {
         try {
             return accademicoDao.trovaEmailUniClass(email);
-        } catch (NoResultException e) {
+        } catch (final NoResultException e) {
             return null;
         }
     }
@@ -107,7 +107,7 @@ public class AccademicoService {
      * @param attivato Lo stato di attivazione degli accademici da cercare.
      * @return Una lista di oggetti Accademico corrispondenti allo stato di attivazione.
      */
-    public List<Accademico> trovaAttivati(boolean attivato) {
+    public List<Accademico> trovaAttivati(final boolean attivato) {
         return accademicoDao.trovaAttivati(attivato);
     }
 
@@ -116,7 +116,7 @@ public class AccademicoService {
      *
      * @param accademico L'accademico da aggiungere o aggiornare.
      */
-    public void aggiungiAccademico(Accademico accademico) {
+    public void aggiungiAccademico(final Accademico accademico) {
         accademicoDao.aggiungiAccademico(accademico);
     }
 
@@ -125,7 +125,7 @@ public class AccademicoService {
      *
      * @param accademico L'accademico da rimuovere.
      */
-    public void rimuoviAccademico(Accademico accademico) {
+    public void rimuoviAccademico(final Accademico accademico) {
         accademicoDao.rimuoviAccademico(accademico);
     }
 
@@ -144,7 +144,7 @@ public class AccademicoService {
      * @param accademico L'accademico di cui cambiare lo stato di attivazione.
      * @param attivazione Il nuovo stato di attivazione.
      */
-    public void cambiaAttivazione(Accademico accademico, boolean attivazione) {
+    public void cambiaAttivazione(final Accademico accademico, final boolean attivazione) {
         accademicoDao.cambiaAttivazione(accademico, attivazione);
     }
 }

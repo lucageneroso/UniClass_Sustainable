@@ -39,7 +39,7 @@ public class ConversazioniServlet extends HttpServlet {
      */
 
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) {
+    public void doGet(final HttpServletRequest request, final HttpServletResponse response) {
         doPost(request, response);
     }
 
@@ -51,21 +51,21 @@ public class ConversazioniServlet extends HttpServlet {
      */
 
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) {
+    public void doPost(final HttpServletRequest request, final HttpServletResponse response) {
         try {
-            HttpSession session = request.getSession();
-            String email = session.getAttribute("utenteEmail").toString();
+            final HttpSession session = request.getSession();
+            final String email = session.getAttribute("utenteEmail").toString();
 
 
-            AccademicoService accademicoService = new AccademicoService();
-            Accademico accademicoSelf = accademicoService.trovaEmailUniClass(email);
+            final AccademicoService accademicoService = new AccademicoService();
+            final Accademico accademicoSelf = accademicoService.trovaEmailUniClass(email);
 
             //Messaggi ricevuti dall'accademicoSelf
-            List<Messaggio> messaggiRicevuti = messaggioService.trovaMessaggiRicevuti(email);
+            final List<Messaggio> messaggiRicevuti = messaggioService.trovaMessaggiRicevuti(email);
             //Messaggi inviati
-            List<Messaggio> messaggiInviati = messaggioService.trovaMessaggiInviati(email);
+            final List<Messaggio> messaggiInviati = messaggioService.trovaMessaggiInviati(email);
 
-            List<Messaggio> messaggi = messaggioService.trovaAvvisi();
+            final List<Messaggio> messaggi = messaggioService.trovaAvvisi();
 
             request.setAttribute("accademicoSelf", accademicoSelf);
             request.setAttribute("messaggiRicevuti", messaggiRicevuti);
@@ -73,11 +73,11 @@ public class ConversazioniServlet extends HttpServlet {
             request.setAttribute("messaggi", messaggi);
 
             request.getRequestDispatcher("Conversazioni.jsp").forward(request, response);
-        } catch (ServletException | IOException e) {
+        } catch (final ServletException | IOException e) {
             request.getServletContext().log("Error processing conversazioni request", e);
             try {
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred processing your request");
-            } catch (IOException ioException) {
+            } catch (final IOException ioException) {
                 request.getServletContext().log("Failed to send error response", ioException);
             }
         }

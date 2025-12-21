@@ -1,19 +1,12 @@
 package it.unisa.uniclass.orari.service;
 
 import it.unisa.uniclass.orari.model.*;
-import it.unisa.uniclass.orari.service.dao.CorsoLaureaRemote;
-import it.unisa.uniclass.orari.service.dao.LezioneDAO;
 import it.unisa.uniclass.orari.service.dao.LezioneRemote;
-import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.NoResultException;
-import jakarta.transaction.Transactional;
-
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import java.sql.Time;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -23,16 +16,16 @@ import java.util.List;
 @Stateless
 public class LezioneService {
 
-    private LezioneRemote lezioneDao;
+    private final LezioneRemote lezioneDao;
 
     /**
      * Costruttore di default che esegue il lookup JNDI del DAO.
      */
     public LezioneService() {
         try {
-            InitialContext ctx = new InitialContext();
+            final InitialContext ctx = new InitialContext();
             this.lezioneDao = (LezioneRemote) ctx.lookup("java:global/UniClass-Dependability/LezioneDAO");
-        } catch (NamingException e) {
+        } catch (final NamingException e) {
             throw new RuntimeException("Errore durante il lookup di LezioneDAO.", e);
         }
     }
@@ -52,10 +45,10 @@ public class LezioneService {
      * @param id L'ID della lezione da cercare.
      * @return L'oggetto Lezione corrispondente all'ID.
      */
-    public Lezione trovaLezione(long id) {
+    public Lezione trovaLezione(final long id) {
         try {
             return lezioneDao.trovaLezione(id);
-        } catch (NoResultException e) {
+        } catch (final NoResultException e) {
             return null;
         }
     }
@@ -66,7 +59,7 @@ public class LezioneService {
      * @param nomeCorso Il nome del corso di cui trovare le lezioni.
      * @return Una lista di oggetti Lezione associati al corso.
      */
-    public List<Lezione> trovaLezioniCorso(String nomeCorso) {
+    public List<Lezione> trovaLezioniCorso(final String nomeCorso) {
         return lezioneDao.trovaLezioniCorso(nomeCorso);
     }
 
@@ -77,7 +70,7 @@ public class LezioneService {
      * @param oraFine L'ora di fine delle lezioni da cercare.
      * @return Una lista di oggetti Lezione che si svolgono nell'intervallo di tempo specificato.
      */
-    public List<Lezione> trovaLezioniOre(Time oraInizio, Time oraFine) {
+    public List<Lezione> trovaLezioniOre(final Time oraInizio, final Time oraFine) {
         return lezioneDao.trovaLezioniOre(oraInizio, oraFine);
     }
 
@@ -89,7 +82,7 @@ public class LezioneService {
      * @param giorno Il giorno in cui si svolgono le lezioni da cercare.
      * @return Una lista di oggetti Lezione che si svolgono nell'intervallo di tempo specificato nel giorno specificato.
      */
-    public List<Lezione> trovaLezioniOreGiorno(Time oraInizio, Time oraFine, Giorno giorno) {
+    public List<Lezione> trovaLezioniOreGiorno(final Time oraInizio, final Time oraFine, final Giorno giorno) {
         return lezioneDao.trovaLezioniOreGiorno(oraInizio, oraFine, giorno);
     }
 
@@ -99,7 +92,7 @@ public class LezioneService {
      * @param nome Il nome dell'aula di cui trovare le lezioni.
      * @return Una lista di oggetti Lezione associati all'aula.
      */
-    public List<Lezione> trovaLezioniAule(String nome) {
+    public List<Lezione> trovaLezioniAule(final String nome) {
         return lezioneDao.trovaLezioniAule(nome);
     }
 
@@ -120,7 +113,7 @@ public class LezioneService {
      * @param annoid L'ID dell'anno.
      * @return Una lista di oggetti Lezione associati al corso di laurea, resto e anno specificati.
      */
-    public List<Lezione> trovaLezioniCorsoLaureaRestoAnno(long clid, long rid, int annoid) {
+    public List<Lezione> trovaLezioniCorsoLaureaRestoAnno(final long clid, final long rid, final int annoid) {
         return lezioneDao.trovaLezioniCorsoLaureaRestoAnno(clid, rid, annoid);
     }
 
@@ -133,7 +126,7 @@ public class LezioneService {
      * @param semestre Il semestre di cui trovare le lezioni.
      * @return Una lista di oggetti Lezione associati al corso di laurea, resto, anno e semestre specificati.
      */
-    public List<Lezione> trovaLezioniCorsoLaureaRestoAnnoSemestre(long clid, long rid, int annoid, int semestre) {
+    public List<Lezione> trovaLezioniCorsoLaureaRestoAnnoSemestre(final long clid, final long rid, final int annoid, final int semestre) {
         return lezioneDao.trovaLezioniCorsoLaureaRestoAnnoSemestre(clid, rid, annoid, semestre);
     }
 
@@ -143,7 +136,7 @@ public class LezioneService {
      * @param nomeDocente Il nome del docente di cui trovare le lezioni.
      * @return Una lista di oggetti Lezione associati al docente.
      */
-    public List<Lezione> trovaLezioniDocente(String nomeDocente) {
+    public List<Lezione> trovaLezioniDocente(final String nomeDocente) {
         return lezioneDao.trovaLezioniDocente(nomeDocente);
     }
 
@@ -152,7 +145,7 @@ public class LezioneService {
      *
      * @param lezione La lezione da aggiungere o aggiornare.
      */
-    public void aggiungiLezione(Lezione lezione) {
+    public void aggiungiLezione(final Lezione lezione) {
         lezioneDao.aggiungiLezione(lezione);
     }
 
@@ -161,7 +154,7 @@ public class LezioneService {
      *
      * @param lezione La lezione da rimuovere.
      */
-    public void rimuoviLezione(Lezione lezione) {
+    public void rimuoviLezione(final Lezione lezione) {
         lezioneDao.rimuoviLezione(lezione);
     }
 }

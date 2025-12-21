@@ -49,22 +49,22 @@ public class chatServlet extends HttpServlet {
     }
 
     @Override
-    public void doGet(HttpServletRequest req, HttpServletResponse resp) {
+    public void doGet(final HttpServletRequest req, final HttpServletResponse resp) {
         try {
-            HttpSession session = req.getSession();
+            final HttpSession session = req.getSession();
 
-            String email = req.getParameter(PARAM_ACCADEMICO);
-            String emailSelf = req.getParameter(PARAM_ACCADEMICO_SELF);
+            final String email = req.getParameter(PARAM_ACCADEMICO);
+            final String emailSelf = req.getParameter(PARAM_ACCADEMICO_SELF);
 
-            Accademico accademico = accademicoService.trovaEmailUniClass(email);
-            Accademico accademicoSelf = accademicoService.trovaEmailUniClass(emailSelf);
+            final Accademico accademico = accademicoService.trovaEmailUniClass(email);
+            final Accademico accademicoSelf = accademicoService.trovaEmailUniClass(emailSelf);
 
-            List<Messaggio> messaggigi = messaggioService.trovaTutti();
+            final List<Messaggio> messaggigi = messaggioService.trovaTutti();
 
-            List<Messaggio> messaggiInviati = new ArrayList<>();
-            List<Messaggio> messaggiRicevuti = new ArrayList<>();
+            final List<Messaggio> messaggiInviati = new ArrayList<>();
+            final List<Messaggio> messaggiRicevuti = new ArrayList<>();
 
-            for (Messaggio messaggio : messaggigi) {
+            for (final Messaggio messaggio : messaggigi) {
                 if (messaggio.getDestinatario().getMatricola().equals(accademicoSelf.getMatricola())) {
                     messaggiRicevuti.add(messaggio);
                 }
@@ -87,19 +87,19 @@ public class chatServlet extends HttpServlet {
 
             resp.sendRedirect(req.getContextPath() + "/chat.jsp");
 
-        } catch (IOException e) {
+        } catch (final IOException e) {
             req.getServletContext().log("Error processing chat request", e);
             try {
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
                         "An error occurred processing your request");
-            } catch (IOException ioException) {
+            } catch (final IOException ioException) {
                 req.getServletContext().log("Failed to send error response", ioException);
             }
         }
     }
 
     @Override
-    public void doPost(HttpServletRequest req, HttpServletResponse resp)
+    public void doPost(final HttpServletRequest req, final HttpServletResponse resp)
             throws ServletException, IOException {
         doGet(req, resp);
     }

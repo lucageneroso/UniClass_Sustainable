@@ -20,24 +20,24 @@ import java.util.List;
 public class getAnno extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+    protected void doGet(final HttpServletRequest request, final HttpServletResponse response) {
         try {
-            PrintWriter printWriter = response.getWriter();
+            final PrintWriter printWriter = response.getWriter();
 
-            String corsoLaurea = request.getParameter("corsoLaurea");
-            CorsoLaureaService corsoLaureaService = new CorsoLaureaService();
-            CorsoLaurea corsoL = corsoLaureaService.trovaCorsoLaurea(corsoLaurea);
+            final String corsoLaurea = request.getParameter("corsoLaurea");
+            final CorsoLaureaService corsoLaureaService = new CorsoLaureaService();
+            final CorsoLaurea corsoL = corsoLaureaService.trovaCorsoLaurea(corsoLaurea);
 
-            JSONArray jsonArray = new JSONArray();
+            final JSONArray jsonArray = new JSONArray();
 
-            AnnoDidatticoService annoDidatticoService = new AnnoDidatticoService();
-
-
-            List<AnnoDidattico> anni = annoDidatticoService.trovaTuttiCorsoLaurea(corsoL.getId());
+            final AnnoDidatticoService annoDidatticoService = new AnnoDidatticoService();
 
 
-            for (AnnoDidattico anno : anni) {
-                JSONObject annoJson = new JSONObject();
+            final List<AnnoDidattico> anni = annoDidatticoService.trovaTuttiCorsoLaurea(corsoL.getId());
+
+
+            for (final AnnoDidattico anno : anni) {
+                final JSONObject annoJson = new JSONObject();
                 annoJson.put("id", anno.getId());
                 annoJson.put("nome", anno.getAnno());
                 jsonArray.put(annoJson);
@@ -48,17 +48,17 @@ public class getAnno extends HttpServlet {
 
             printWriter.println(jsonArray.toString());
             printWriter.flush();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             request.getServletContext().log("Error processing getAnno request", e);
             try {
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred processing your request");
-            } catch (IOException ioException) {
+            } catch (final IOException ioException) {
                 request.getServletContext().log("Failed to send error response", ioException);
             }
         }
     }
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+    protected void doPost(final HttpServletRequest request, final HttpServletResponse response) {
         doGet(request, response);
     }
 

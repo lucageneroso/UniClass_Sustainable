@@ -16,7 +16,7 @@ import java.util.List;
 @Stateless
 public class CorsoService {
 
-    private CorsoRemote corsoDao;
+    private final CorsoRemote corsoDao;
 
     /**
      * Costruttore di default che esegue il lookup JNDI del DAO.
@@ -25,9 +25,9 @@ public class CorsoService {
      */
     public CorsoService() throws NamingException {
         try {
-            InitialContext ctx = new InitialContext();
+            final InitialContext ctx = new InitialContext();
             this.corsoDao = (CorsoRemote) ctx.lookup("java:global/UniClass-Dependability/CorsoDAO");
-        } catch (NamingException e) {
+        } catch (final NamingException e) {
             throw new RuntimeException("Errore durante il lookup di CorsoDAO", e);
         }
     }
@@ -47,10 +47,10 @@ public class CorsoService {
      * @param id L'ID del corso da cercare.
      * @return L'oggetto Corso corrispondente all'ID.
      */
-    public Corso trovaCorso(long id) {
+    public Corso trovaCorso(final long id) {
         try {
             return corsoDao.trovaCorso(id);
-        } catch (NoResultException e) {
+        } catch (final NoResultException e) {
             return null;
         }
     }
@@ -61,7 +61,7 @@ public class CorsoService {
      * @param nomeCorsoLaurea Il nome del corso di laurea di cui trovare i corsi.
      * @return Una lista di oggetti Corso associati al corso di laurea.
      */
-    public List<Corso> trovaCorsiCorsoLaurea(String nomeCorsoLaurea) {
+    public List<Corso> trovaCorsiCorsoLaurea(final String nomeCorsoLaurea) {
         return corsoDao.trovaCorsiCorsoLaurea(nomeCorsoLaurea);
     }
 
@@ -79,7 +79,7 @@ public class CorsoService {
      *
      * @param corso Il corso da aggiungere o aggiornare.
      */
-    public void aggiungiCorso(Corso corso) {
+    public void aggiungiCorso(final Corso corso) {
         corsoDao.aggiungiCorso(corso);
     }
 
@@ -88,7 +88,7 @@ public class CorsoService {
      *
      * @param corso Il corso da rimuovere.
      */
-    public void rimuoviCorso(Corso corso) {
+    public void rimuoviCorso(final Corso corso) {
         corsoDao.rimuoviCorso(corso);
     }
 }

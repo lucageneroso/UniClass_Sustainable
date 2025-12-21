@@ -6,7 +6,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static it.unisa.uniclass.orari.model.AnnoDidattico.*;
 
 /**
  * Rappresenta un anno didattico associato a uno o più corsi di laurea.
@@ -86,8 +85,8 @@ public class AnnoDidattico implements Serializable {
      * @return Una lista di oggetti {@link Corso}.
      */
     /*@ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == corsi;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == corsi; //NOSONAR
       @*/
     public /*@ nullable */ List<Corso> getCorsi() {
         return corsi;
@@ -99,8 +98,8 @@ public class AnnoDidattico implements Serializable {
      * @param corsi La lista di oggetti {@link Corso} da associare.
      */
     /*@ public normal_behavior
-      @ assignable this.corsi;
-      @ ensures this.corsi == corsi;
+      @ assignable this.corsi; //NOSONAR
+      @ ensures this.corsi == corsi; //NOSONAR
       @*/
     public void setCorsi(List<Corso> corsi) {
         this.corsi = corsi;
@@ -112,9 +111,9 @@ public class AnnoDidattico implements Serializable {
      * @param anno Nome o descrizione dell'anno didattico.
      * */
     /*@ public normal_behavior
-      @ assignable \everything;
-      @ ensures this.anno == anno;
-      @ ensures true;
+      @ assignable \everything; //NOSONAR
+      @ ensures this.anno == anno; //NOSONAR
+      @ ensures true; //NOSONAR
       @*/
     public AnnoDidattico(String anno){
         this.anno = anno;
@@ -124,8 +123,8 @@ public class AnnoDidattico implements Serializable {
      * Costruttore di default.
      * */
     /*@ public normal_behavior
-      @ assignable \nothing;
-      @ ensures true;
+      @ assignable \nothing; //NOSONAR
+      @ ensures true; //NOSONAR
       @*/
     public AnnoDidattico(){}
 
@@ -135,8 +134,8 @@ public class AnnoDidattico implements Serializable {
      * @return Il valore del campo {@code anno}
      * */
     /*@ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == anno;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == anno; //NOSONAR
       @*/
     public /*@ nullable */ String getAnno() {
         return anno;
@@ -148,8 +147,8 @@ public class AnnoDidattico implements Serializable {
      * @param anno Nome o descrizione dell'anno didattico.
      * */
     /*@ public normal_behavior
-      @ assignable this.anno;
-      @ ensures this.anno == anno;
+      @ assignable this.anno; //NOSONAR
+      @ ensures this.anno == anno; //NOSONAR
       @*/
     public void setAnno(String anno) {
         this.anno = anno;
@@ -161,8 +160,8 @@ public class AnnoDidattico implements Serializable {
      * @return Il valore del campo {@code id}.
      * */
     /*@ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == id;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == id; //NOSONAR
       @*/
     public int getId() {
         return id;
@@ -174,8 +173,8 @@ public class AnnoDidattico implements Serializable {
      * @return Una lista di oggetti {@code CorsoLaurea}
      * */
     /*@ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == corsiLaurea;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == corsiLaurea; //NOSONAR
       @*/
     public /*@ nullable */ List<CorsoLaurea> getCorsiLaurea() {
         return corsiLaurea;
@@ -187,8 +186,8 @@ public class AnnoDidattico implements Serializable {
      * @param corsiLaurea Una lista di oggetti {@code CorsoLaurea}
      * */
     /*@ public normal_behavior
-      @ assignable this.corsiLaurea;
-      @ ensures this.corsiLaurea == corsiLaurea;
+      @ assignable this.corsiLaurea; //NOSONAR
+      @ ensures this.corsiLaurea == corsiLaurea; //NOSONAR
       @*/
     public void setCorsiLaurea(List<CorsoLaurea> corsiLaurea) {
         this.corsiLaurea = corsiLaurea;

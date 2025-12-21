@@ -15,16 +15,16 @@ import java.util.List;
 public class GetNonAttivati extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+    protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) {
         try {
-            AccademicoService accademicoService = new AccademicoService();
+            final AccademicoService accademicoService = new AccademicoService();
 
-            List<Accademico> nonAttivati = accademicoService.trovaAttivati(false);
+            final List<Accademico> nonAttivati = accademicoService.trovaAttivati(false);
 
-            JSONArray jsonArray = new JSONArray();
+            final JSONArray jsonArray = new JSONArray();
 
-            for (Accademico accademico : nonAttivati) {
-                JSONObject jsonUtente = new JSONObject();
+            for (final Accademico accademico : nonAttivati) {
+                final JSONObject jsonUtente = new JSONObject();
                 jsonUtente.put("email", accademico.getEmail());
                 jsonUtente.put("matricola", accademico.getMatricola());
                 jsonUtente.put("tipo", accademico.getTipo());
@@ -35,18 +35,18 @@ public class GetNonAttivati extends HttpServlet {
             resp.setCharacterEncoding("UTF-8");
 
             resp.getWriter().write(jsonArray.toString());
-        } catch (Exception e) {
+        } catch (final Exception e) {
             req.getServletContext().log("Error processing GetNonAttivati request", e);
             try {
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred processing your request");
-            } catch (Exception ioException) {
+            } catch (final Exception ioException) {
                 req.getServletContext().log("Failed to send error response", ioException);
             }
         }
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+    protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) {
         doGet(req, resp);
     }
 }

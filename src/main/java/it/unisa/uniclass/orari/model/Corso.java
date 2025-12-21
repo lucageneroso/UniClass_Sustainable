@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static it.unisa.uniclass.orari.model.Corso.*;
 
 /**
  * Classe che rappresenta un corso universitario.
@@ -91,8 +90,8 @@ public class Corso implements Serializable {
      * @return Anno didattico del corso
      */
     /*@ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == annoDidattico;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == annoDidattico; //NOSONAR
       @*/
     public /*@ nullable */ AnnoDidattico getAnnoDidattico() {
         return annoDidattico;
@@ -104,8 +103,8 @@ public class Corso implements Serializable {
      * @param annoDidattico Anno didattico
      */
     /*@ public normal_behavior
-      @ assignable this.annoDidattico;
-      @ ensures this.annoDidattico == annoDidattico;
+      @ assignable this.annoDidattico; //NOSONAR
+      @ ensures this.annoDidattico == annoDidattico; //NOSONAR
       @*/
     public void setAnnoDidattico(AnnoDidattico annoDidattico) {
         this.annoDidattico = annoDidattico;
@@ -120,9 +119,9 @@ public class Corso implements Serializable {
      * @param nome Nome del corso.
      * */
     /*@ public normal_behavior
-      @ assignable \everything;
-      @ ensures this.nome == nome;
-      @ ensures true;
+      @ assignable \everything; //NOSONAR
+      @ ensures this.nome == nome; //NOSONAR
+      @ ensures true; //NOSONAR
       @*/
     public Corso(String nome) {
         this.nome = nome;
@@ -134,8 +133,8 @@ public class Corso implements Serializable {
      * Costruttore di default per creare un corso vuoto
      * */
     /*@ public normal_behavior
-      @ assignable \nothing;
-      @ ensures true;
+      @ assignable \nothing; //NOSONAR
+      @ ensures true; //NOSONAR
       @*/
     public Corso() {
         lezioni = new ArrayList<>();
@@ -147,8 +146,8 @@ public class Corso implements Serializable {
      * @return Lista dei docenti
      * */
     /*@ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == docenti;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == docenti; //NOSONAR
       @*/
     public /*@ nullable */ List<Docente> getDocenti() {
         return docenti;
@@ -160,8 +159,8 @@ public class Corso implements Serializable {
      * @param docenti Lista dei docenti.
      * */
     /*@ public normal_behavior
-      @ assignable this.docenti;
-      @ ensures this.docenti == docenti;
+      @ assignable this.docenti; //NOSONAR
+      @ ensures this.docenti == docenti; //NOSONAR
       @*/
     public void setDocenti(List<Docente> docenti) {
         this.docenti = docenti;
@@ -173,8 +172,8 @@ public class Corso implements Serializable {
      * @return ID del corso
      * */
     /*@ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == id;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == id; //NOSONAR
       @*/
     public /*@ nullable */ Long getId() {
         return id;
@@ -186,8 +185,8 @@ public class Corso implements Serializable {
      * @return Corso di laurea
      * */
     /*@ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == corsoLaurea;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == corsoLaurea; //NOSONAR
       @*/
     public /*@ nullable */ CorsoLaurea getCorsoLaurea() {
         return corsoLaurea;
@@ -199,8 +198,8 @@ public class Corso implements Serializable {
      * @return Lista delle lezioni.
      * */
     /*@ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == lezioni;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == lezioni; //NOSONAR
       @*/
     public /*@ nullable */ List<Lezione> getLezioni() {
         return lezioni;
@@ -212,8 +211,8 @@ public class Corso implements Serializable {
      * @return Nome del corso.
      * */
     /*@ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == nome;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == nome; //NOSONAR
       @*/
     public /*@ nullable */ String getNome() {
         return nome;
@@ -225,8 +224,8 @@ public class Corso implements Serializable {
      * @param corsoLaurea Corso di laurea.
      * */
     /*@ public normal_behavior
-      @ assignable this.corsoLaurea;
-      @ ensures this.corsoLaurea == corsoLaurea;
+      @ assignable this.corsoLaurea; //NOSONAR
+      @ ensures this.corsoLaurea == corsoLaurea; //NOSONAR
       @*/
     public void setCorsoLaurea(CorsoLaurea corsoLaurea) {
         this.corsoLaurea = corsoLaurea;
@@ -238,8 +237,8 @@ public class Corso implements Serializable {
      * @param lezioni Lista delle lezioni.
      * */
     /*@ public normal_behavior
-      @ assignable this.lezioni;
-      @ ensures this.lezioni == lezioni;
+      @ assignable this.lezioni; //NOSONAR
+      @ ensures this.lezioni == lezioni; //NOSONAR
       @*/
     public void setLezioni(List<Lezione> lezioni) {
         this.lezioni = lezioni;
@@ -251,8 +250,8 @@ public class Corso implements Serializable {
      * @param nome Nome del corso
      * */
     /*@ public normal_behavior
-      @ assignable this.nome;
-      @ ensures this.nome == nome;
+      @ assignable this.nome; //NOSONAR
+      @ ensures this.nome == nome; //NOSONAR
       @*/
     public void setNome(String nome) {
         this.nome = nome;

@@ -1,7 +1,13 @@
 package it.unisa.uniclass.common.security;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.security.SecureRandom;
 
 public class PasswordGenerator {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(PasswordGenerator.class);
 
     public static String generatePassword(int length) {
         if (length < 8) {
@@ -53,6 +59,6 @@ public class PasswordGenerator {
     // Metodo main per testare la funzione
     public static void main(String[] args) {
         String password = generatePassword(12); // Genera una password di 12 caratteri
-        System.out.println("Password generata: " + password);
+        LOGGER.info("Password generata: {}", password);
     }
 }

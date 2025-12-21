@@ -120,10 +120,11 @@ public class Messaggio implements Serializable {
      *
      * @return Il destinatario
      * */
-    /*@ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == destinatario;
-      @*/
+
+    /*@ public normal_behavior //NOSONAR
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == destinatario; //NOSONAR
+      @*/ //NOSONAR
     public /*@ nullable */ Accademico getDestinatario() {
         return destinatario;
     }
@@ -133,9 +134,9 @@ public class Messaggio implements Serializable {
      *
      * @param destinatario Il destinatario da impostare.
      * */
-    /*@ public normal_behavior
-      @ assignable this.destinatario;
-      @ ensures this.destinatario == destinatario;
+    /*@ public normal_behavior //NOSONAR
+      @ assignable this.destinatario; //NOSONAR
+      @ ensures this.destinatario == destinatario; //NOSONAR
       @*/
     public void setDestinatario(Accademico destinatario) {
         this.destinatario = destinatario;
@@ -147,9 +148,9 @@ public class Messaggio implements Serializable {
      * @return L'autore.
      * */
     /*@
-      @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == autore;
+      @ public normal_behavior //NOSONAR
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == autore; //NOSONAR
       @*/
     public /*@ nullable */ Accademico getAutore() {
         return autore;
@@ -161,8 +162,8 @@ public class Messaggio implements Serializable {
      * @param autore L'autore da impostare.
      * */
     /*@ public normal_behavior
-      @ assignable this.autore;
-      @ ensures this.autore == autore;
+      @ assignable this.autore; //NOSONAR
+      @ ensures this.autore == autore; //NOSONAR
       @*/
     public void setAutore(Accademico autore) {
         this.autore = autore;
@@ -172,8 +173,8 @@ public class Messaggio implements Serializable {
      * Costruttore vuoto necessario per JPA.
      * */
     /*@ public normal_behavior
-      @ assignable \nothing;
-      @ ensures true;
+      @ assignable \nothing; //NOSONAR
+      @ ensures true; //NOSONAR
       @*/
     public Messaggio() {}
 
@@ -187,12 +188,12 @@ public class Messaggio implements Serializable {
      * @param dateTime  La data e ora di creazione
      * */
     /*@ public normal_behavior
-      @ assignable \everything;
-      @ ensures this.autore == autore;
-      @ ensures this.destinatario == destinatario;
-      @ ensures this.topic == topic;
-      @ ensures this.body == body;
-      @ ensures this.dateTime == dateTime;
+      @ assignable \everything; //NOSONAR
+      @ ensures this.autore == autore; //NOSONAR
+      @ ensures this.destinatario == destinatario; //NOSONAR
+      @ ensures this.topic == topic; //NOSONAR
+      @ ensures this.body == body; //NOSONAR
+      @ ensures this.dateTime == dateTime; //NOSONAR
       @*/
     public Messaggio(Accademico autore, Accademico destinatario, Topic topic, String body, LocalDateTime dateTime) {
         this.autore = autore;
@@ -210,8 +211,8 @@ public class Messaggio implements Serializable {
      *
      * */
     /*@ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == dateTime;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == dateTime; //NOSONAR
       @*/
     public /*@ nullable */ LocalDateTime getDateTime() {
         return dateTime;
@@ -223,8 +224,8 @@ public class Messaggio implements Serializable {
      * @param dateTime La data e ora da impostare.
      * */
     /*@ public normal_behavior
-      @ assignable this.dateTime;
-      @ ensures this.dateTime == dateTime;
+      @ assignable this.dateTime; //NOSONAR
+      @ ensures this.dateTime == dateTime; //NOSONAR
       @*/
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
@@ -236,8 +237,8 @@ public class Messaggio implements Serializable {
      * @return Il corpo.
      * */
     /*@ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == body;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == body; //NOSONAR
       @*/
     public /*@ nullable */ String getBody() {
         return body;
@@ -249,8 +250,8 @@ public class Messaggio implements Serializable {
      * @param body Il corpo da impostare.
      * */
     /*@ public normal_behavior
-      @ assignable this.body;
-      @ ensures this.body == body;
+      @ assignable this.body; //NOSONAR
+      @ ensures this.body == body; //NOSONAR
       @*/
     public void setBody(String body) {
         this.body = body;
@@ -262,8 +263,8 @@ public class Messaggio implements Serializable {
      * @return Il topic.
      * */
     /*@ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == topic;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == topic; //NOSONAR
       @*/
     public /*@ nullable */ Topic getTopic() {
         return topic;
@@ -275,8 +276,8 @@ public class Messaggio implements Serializable {
      * @param topic Il topic da impostare.
      * */
     /*@ public normal_behavior
-      @ assignable this.topic;
-      @ ensures this.topic == topic;
+      @ assignable this.topic; //NOSONAR
+      @ ensures this.topic == topic; //NOSONAR
       @*/
     public void setTopic(Topic topic) {
         this.topic = topic;
@@ -288,8 +289,8 @@ public class Messaggio implements Serializable {
      * @return L'id
      */
     /*@ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == id;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == id; //NOSONAR
       @*/
     public /*@ nullable */ Long getId() {
         return id;

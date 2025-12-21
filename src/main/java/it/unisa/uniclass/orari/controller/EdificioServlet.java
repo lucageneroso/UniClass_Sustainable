@@ -15,36 +15,36 @@ import java.util.List;
 public class EdificioServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+    protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) {
         try {
-            String edificio = req.getParameter("ed");
+            final String edificio = req.getParameter("ed");
 
             AulaService aulaService = null;
             try {
                 aulaService = new AulaService();
-            } catch (NamingException e) {
+            } catch (final NamingException e) {
                 req.getServletContext().log("Error creating AulaService", e);
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred processing your request");
                 return;
             }
 
-            List<Aula> aule = aulaService.trovaAuleEdificio(edificio);
+            final List<Aula> aule = aulaService.trovaAuleEdificio(edificio);
 
             req.setAttribute("aule", aule);
             req.setAttribute("ed", edificio);
             req.getRequestDispatcher("/edificio.jsp").forward(req, resp);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             req.getServletContext().log("Error processing edificio request", e);
             try {
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred processing your request");
-            } catch (IOException ioException) {
+            } catch (final IOException ioException) {
                 req.getServletContext().log("Failed to send error response", ioException);
             }
         }
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+    protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) {
         doGet(req, resp);
     }
 }

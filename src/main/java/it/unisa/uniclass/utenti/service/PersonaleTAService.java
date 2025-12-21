@@ -1,6 +1,5 @@
 package it.unisa.uniclass.utenti.service;
 
-import it.unisa.uniclass.utenti.model.Accademico;
 import it.unisa.uniclass.utenti.model.PersonaleTA;
 import it.unisa.uniclass.utenti.service.dao.PersonaleTARemote;
 import jakarta.ejb.Stateless;
@@ -17,16 +16,16 @@ import java.util.List;
 @Stateless
 public class PersonaleTAService {
 
-    private PersonaleTARemote personaleTAdao;
+    private final PersonaleTARemote personaleTAdao;
 
     /**
      * Costruttore di default che esegue il lookup JNDI del DAO.
      */
     public PersonaleTAService() {
         try {
-            InitialContext ctx = new InitialContext();
+            final InitialContext ctx = new InitialContext();
             personaleTAdao = (PersonaleTARemote) ctx.lookup("java:global/UniClass-Dependability/PersonaleTADAO");
-        } catch (NamingException e) {
+        } catch (final NamingException e) {
             throw new RuntimeException("Errore durante il lookup di PersonaleTADAO", e);
         }
     }
@@ -47,10 +46,10 @@ public class PersonaleTAService {
      * @param id L'ID del personale da cercare.
      * @return L'oggetto PersonaleTA corrispondente all'ID.
      */
-    public PersonaleTA trovaPersonale(long id) {
+    public PersonaleTA trovaPersonale(final long id) {
         try {
             return personaleTAdao.trovaPersonale(id);
-        } catch (NoResultException e) {
+        } catch (final NoResultException e) {
             return null;
         }
     }
@@ -70,10 +69,10 @@ public class PersonaleTAService {
      * @param email L'email del personale da cercare.
      * @return L'oggetto PersonaleTA corrispondente all'email.
      */
-    public PersonaleTA trovaEmail(String email) {
+    public PersonaleTA trovaEmail(final String email) {
         try {
             return personaleTAdao.trovaEmail(email);
-        } catch (NoResultException e) {
+        } catch (final NoResultException e) {
             return null;
         }
     }
@@ -85,10 +84,10 @@ public class PersonaleTAService {
      * @param pass La password del personale da cercare.
      * @return L'oggetto PersonaleTA corrispondente all'email e alla password.
      */
-    public PersonaleTA trovaEmailPass(String email, String pass) {
+    public PersonaleTA trovaEmailPass(final String email, final String pass) {
         try {
             return personaleTAdao.trovaEmailPassword(email, pass);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             return null;
         }
     }
@@ -98,7 +97,7 @@ public class PersonaleTAService {
      *
      * @param personaleTA Il personale da aggiungere o aggiornare.
      */
-    public void aggiungiPersonaleTA(PersonaleTA personaleTA) {
+    public void aggiungiPersonaleTA(final PersonaleTA personaleTA) {
         personaleTAdao.aggiungiPersonale(personaleTA);
     }
 
@@ -107,7 +106,7 @@ public class PersonaleTAService {
      *
      * @param personaleTA Il personale da rimuovere.
      */
-    public void rimuoviPersonaleTA(PersonaleTA personaleTA) {
+    public void rimuoviPersonaleTA(final PersonaleTA personaleTA) {
         personaleTAdao.rimuoviPersonale(personaleTA);
     }
 }

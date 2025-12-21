@@ -39,35 +39,35 @@ public class LoginServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+    protected void doGet(final HttpServletRequest request, final HttpServletResponse response) {
         doPost(request, response);
     }
 
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) {
+    public void doPost(final HttpServletRequest request, final HttpServletResponse response) {
         try {
             initializeServices();
 
-            String email = request.getParameter("email");
-            String password = CredentialSecurity.hashPassword(request.getParameter("password"));
+            final String email = request.getParameter("email");
+            final String password = CredentialSecurity.hashPassword(request.getParameter("password"));
 
-            Accademico user1 = accademicoService.trovaEmailPassUniclass(email, password);
-            PersonaleTA user2 = personaleTAService.trovaEmailPass(email, password);
+            final Accademico user1 = accademicoService.trovaEmailPassUniclass(email, password);
+            final PersonaleTA user2 = personaleTAService.trovaEmailPass(email, password);
 
-            Utente user = resolveUser(user1, user2, request, response);
+            final Utente user = resolveUser(user1, user2, request, response);
             if (user == null) {
                 return; // redirect già gestito
             }
 
-            HttpSession session = request.getSession(true);
+            final HttpSession session = request.getSession(true);
             session.setAttribute("currentSessionUser", user);
             response.sendRedirect(request.getContextPath() + "/Home");
 
-        } catch (IOException e) {
+        } catch (final IOException e) {
             request.getServletContext().log("Error processing login request", e);
             try {
                 response.sendRedirect(request.getContextPath() + LOGIN_ERROR);
-            } catch (IOException ioException) {
+            } catch (final IOException ioException) {
                 request.getServletContext().log("Failed to redirect after error", ioException);
             }
         }
@@ -86,8 +86,8 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
-    private Utente resolveUser(Accademico user1, PersonaleTA user2,
-                               HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private Utente resolveUser(final Accademico user1, final PersonaleTA user2,
+                               final HttpServletRequest request, final HttpServletResponse response) throws IOException {
 
         if (user1 == null && user2 == null) {
             response.sendRedirect(request.getContextPath() + LOGIN_ERROR);

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static it.unisa.uniclass.orari.model.CorsoLaurea.*;
 
 /**
  * Classe che rappresenta un Corso di Laurea.
@@ -95,9 +94,9 @@ public class CorsoLaurea implements Serializable {
      * @param nome Nome del corso di laurea
      * */
     /*@ public normal_behavior
-      @ assignable \everything;
-      @ ensures this.nome == nome;
-      @ ensures true;
+      @ assignable \everything; //NOSONAR
+      @ ensures this.nome == nome; //NOSONAR
+      @ ensures true; //NOSONAR
       @*/
     public CorsoLaurea(String nome) {
         this.nome = nome;
@@ -112,10 +111,10 @@ public class CorsoLaurea implements Serializable {
      * @param anniDidattici Lista degli anni didattici associati.
      * */
     /*@ public normal_behavior
-      @ assignable \everything;
-      @ ensures this.nome == nome;
-      @ ensures this.resti == resti;
-      @ ensures this.anniDidattici == anniDidattici;
+      @ assignable \everything; //NOSONAR
+      @ ensures this.nome == nome; //NOSONAR
+      @ ensures this.resti == resti; //NOSONAR
+      @ ensures this.anniDidattici == anniDidattici; //NOSONAR
       @*/
     public CorsoLaurea(String nome, List<Resto> resti, List<AnnoDidattico> anniDidattici) {
         this.nome = nome;
@@ -129,8 +128,8 @@ public class CorsoLaurea implements Serializable {
      * Inizializza liste vuote e il nome a null.
      * */
     /*@ public normal_behavior
-      @ assignable \nothing;
-      @ ensures true;
+      @ assignable \nothing; //NOSONAR
+      @ ensures true; //NOSONAR
       @*/
     public CorsoLaurea() {
         this.corsi = new ArrayList<>();
@@ -144,8 +143,8 @@ public class CorsoLaurea implements Serializable {
      * @return Lista dei resti.
      * */
     /*@ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == resti;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == resti; //NOSONAR
       @*/
     public /*@ nullable */ List<Resto> getResti() {
         return resti;
@@ -156,8 +155,8 @@ public class CorsoLaurea implements Serializable {
      * @param resti Lista dei resti da associare.
      * */
     /*@ public normal_behavior
-      @ assignable this.resti;
-      @ ensures this.resti == resti;
+      @ assignable this.resti; //NOSONAR
+      @ ensures this.resti == resti; //NOSONAR
       @*/
     public void setResti(List<Resto> resti) {
         this.resti = resti;
@@ -169,8 +168,8 @@ public class CorsoLaurea implements Serializable {
      * @return Lista degli anni didattici.
      */
     /*@ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == anniDidattici;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == anniDidattici; //NOSONAR
       @*/
     public /*@ nullable */ List<AnnoDidattico> getAnniDidattici() {
         return anniDidattici;
@@ -182,8 +181,8 @@ public class CorsoLaurea implements Serializable {
      * @param anniDidattici Lista degli anni didattici da associare.
      */
     /*@ public normal_behavior
-      @ assignable this.anniDidattici;
-      @ ensures this.anniDidattici == anniDidattici;
+      @ assignable this.anniDidattici; //NOSONAR
+      @ ensures this.anniDidattici == anniDidattici; //NOSONAR
       @*/
     public void setAnniDidattici(List<AnnoDidattico> anniDidattici) {
         this.anniDidattici = anniDidattici;
@@ -195,8 +194,8 @@ public class CorsoLaurea implements Serializable {
      * @return ID del corso di laurea.
      * */
     /*@ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == id;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == id; //NOSONAR
       @*/
     public /*@ nullable */ Long getId() {
         return id;
@@ -208,8 +207,8 @@ public class CorsoLaurea implements Serializable {
      * @return Lista dei corsi.
      * */
     /*@ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == corsi;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == corsi; //NOSONAR
       @*/
     public /*@ nullable */ List<Corso> getCorsi() {
         return corsi;
@@ -221,8 +220,8 @@ public class CorsoLaurea implements Serializable {
      * @return Nome del corso di laurea.
      */
     /*@ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == nome;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == nome; //NOSONAR
       @*/
     public /*@ nullable */ String getNome() {
         return nome;
@@ -234,8 +233,8 @@ public class CorsoLaurea implements Serializable {
      * @param nome Nome del corso di laurea da impostare.
      */
     /*@ public normal_behavior
-      @ assignable this.nome;
-      @ ensures this.nome == nome;
+      @ assignable this.nome; //NOSONAR
+      @ ensures this.nome == nome; //NOSONAR
       @*/
     public void setNome(String nome) {
         this.nome = nome;
@@ -247,8 +246,8 @@ public class CorsoLaurea implements Serializable {
      * @param corsi Lista dei corsi da associare.
      */
     /*@ public normal_behavior
-      @ assignable this.corsi;
-      @ ensures this.corsi == corsi;
+      @ assignable this.corsi; //NOSONAR
+      @ ensures this.corsi == corsi; //NOSONAR
       @*/
     public void setCorsi(List<Corso> corsi) {
         this.corsi = corsi;
@@ -260,8 +259,8 @@ public class CorsoLaurea implements Serializable {
      * @return Lista degli studenti.
      */
     /*@ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == studenti;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == studenti; //NOSONAR
       @*/
     public /*@ nullable */ Collection<Studente> getStudenti() {
         return studenti;
@@ -273,8 +272,8 @@ public class CorsoLaurea implements Serializable {
      * @param studenti Lista degli studenti da associare.
      */
     /*@ public normal_behavior
-      @ assignable this.studenti;
-      @ ensures this.studenti == studenti;
+      @ assignable this.studenti; //NOSONAR
+      @ ensures this.studenti == studenti; //NOSONAR
       @*/
     public void setStudenti(List<Studente> studenti) {
         this.studenti = studenti;

@@ -25,12 +25,12 @@ public class AnnoDidatticoDAO implements AnnoDidatticoRemote {
      */
     /*@ also
       @   public normal_behavior
-      @   requires anno != null && !anno.isEmpty();
-      @   ensures (\forall AnnoDidattico a; \result.contains(a); a.getAnno().equals(anno));
+      @   requires anno != null && !anno.isEmpty(); //NOSONAR
+      @   ensures (\forall AnnoDidattico a; \result.contains(a); a.getAnno().equals(anno)); //NOSONAR
       @*/
     @Override
     public List<AnnoDidattico> trovaAnno(String anno) {
-        //@   assume emUniClass != null;
+        //@   assume emUniClass != null; //NOSONAR
         TypedQuery<AnnoDidattico> query = emUniClass.createNamedQuery(AnnoDidattico.TROVA_ANNO, AnnoDidattico.class);
         query.setParameter("anno", anno);
         return query.getResultList();
@@ -44,12 +44,12 @@ public class AnnoDidatticoDAO implements AnnoDidatticoRemote {
      */
     /*@ also
       @   public normal_behavior
-      @   requires id > 0;
-      @   ensures true;
+      @   requires id > 0; //NOSONAR
+      @   ensures true; //NOSONAR
       @*/
     @Override
     public AnnoDidattico trovaId(int id) {
-        //@   assume emUniClass != null;
+        //@   assume emUniClass != null; //NOSONAR
         TypedQuery<AnnoDidattico> query = emUniClass.createNamedQuery(AnnoDidattico.TROVA_ID, AnnoDidattico.class);
         query.setParameter("id", id);
         return query.getSingleResult();
@@ -63,12 +63,12 @@ public class AnnoDidatticoDAO implements AnnoDidatticoRemote {
     /*@
         also
         public normal_behavior
-        requires true;
-        ensures true;
+        requires true; //NOSONAR
+        ensures true; //NOSONAR
       @*/
     @Override
     public List<AnnoDidattico> trovaTutti() {
-        //@   assume emUniClass != null;
+        //@   assume emUniClass != null; //NOSONAR
         TypedQuery<AnnoDidattico> query = emUniClass.createNamedQuery(AnnoDidattico.TROVA_TUTTI, AnnoDidattico.class);
         return query.getResultList();
     }
@@ -82,12 +82,12 @@ public class AnnoDidatticoDAO implements AnnoDidatticoRemote {
     /*@
       @ also
       @ public normal_behavior
-      @ requires id > 0;
-      @ ensures true;
+      @ requires id > 0; //NOSONAR
+      @ ensures true; //NOSONAR
       @*/
     @Override
     public List<AnnoDidattico> trovaTuttiCorsoLaurea(long id) {
-        //@   assume emUniClass != null;
+        //@   assume emUniClass != null; //NOSONAR
         TypedQuery<AnnoDidattico> query = emUniClass.createNamedQuery(AnnoDidattico.TROVA_ANNI_CORSOLAUREA, AnnoDidattico.class);
         query.setParameter("corsoId", id);
         return query.getResultList();
@@ -103,12 +103,12 @@ public class AnnoDidatticoDAO implements AnnoDidatticoRemote {
     /*@
       @ also
       @ public normal_behavior
-      @ requires id > 0 && anno != null && !anno.isEmpty();
-      @ ensures true;
+      @ requires id > 0 && anno != null && !anno.isEmpty(); //NOSONAR
+      @ ensures true; //NOSONAR
      */
     @Override
     public AnnoDidattico trovaCorsoLaureaNome(long id, String anno) {
-        //@   assume emUniClass != null;
+        //@   assume emUniClass != null; //NOSONAR
         TypedQuery<AnnoDidattico> query = emUniClass.createNamedQuery(AnnoDidattico.TROVA_ANNI_CORSOLAUREA_NOME, AnnoDidattico.class);
         query.setParameter("corsoId", id);
         query.setParameter("anno", anno);
@@ -123,12 +123,12 @@ public class AnnoDidatticoDAO implements AnnoDidatticoRemote {
     /*@
       @ also
       @ public normal_behavior
-      @ requires annoDidattico != null;
-      @ ensures true;
+      @ requires annoDidattico != null; //NOSONAR
+      @ ensures true; //NOSONAR
       @*/
     @Override
     public void aggiungiAnno(AnnoDidattico annoDidattico) {
-        //@   assume emUniClass != null;
+        //@   assume emUniClass != null; //NOSONAR
         emUniClass.merge(annoDidattico);
     }
 
@@ -140,12 +140,12 @@ public class AnnoDidatticoDAO implements AnnoDidatticoRemote {
     /*@
       @ also
       @ public normal_behavior
-      @ requires annoDidattico != null;
-      @ ensures true;
+      @ requires annoDidattico != null; //NOSONAR
+      @ ensures true; //NOSONAR
       @*/
     @Override
     public void rimuoviAnno(AnnoDidattico annoDidattico) {
-        //@   assume emUniClass != null;
+        //@   assume emUniClass != null; //NOSONAR
         emUniClass.remove(annoDidattico);
     }
 }

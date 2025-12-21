@@ -21,27 +21,27 @@ import java.util.List;
 public class cercaOrario extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+    protected void doPost(final HttpServletRequest request, final HttpServletResponse response) {
         try {
-            String corsoNome = request.getParameter("corsoLaurea");
-            String restoNome = request.getParameter("resto");
-            String annoNome = request.getParameter("anno");
+            final String corsoNome = request.getParameter("corsoLaurea");
+            final String restoNome = request.getParameter("resto");
+            final String annoNome = request.getParameter("anno");
 
-            CorsoLaureaService corsoLaureaService = new CorsoLaureaService();
-            CorsoLaurea corsoLaurea = corsoLaureaService.trovaCorsoLaurea(corsoNome);
+            final CorsoLaureaService corsoLaureaService = new CorsoLaureaService();
+            final CorsoLaurea corsoLaurea = corsoLaureaService.trovaCorsoLaurea(corsoNome);
 
 
             //Prendo il resto
-            RestoService restoService = new RestoService();
-            Resto resto = restoService.trovaRestoNomeCorso(restoNome, corsoLaurea);
+            final RestoService restoService = new RestoService();
+            final Resto resto = restoService.trovaRestoNomeCorso(restoNome, corsoLaurea);
 
             //Prendo l'anno di quel certo corso (e l'anno ha un certo nome)
-            AnnoDidatticoService annoDidatticoService = new AnnoDidatticoService();
-            AnnoDidattico annoDidattico = annoDidatticoService.trovaTuttiCorsoLaureaNome(corsoLaurea.getId(),annoNome);
+            final AnnoDidatticoService annoDidatticoService = new AnnoDidatticoService();
+            final AnnoDidattico annoDidattico = annoDidatticoService.trovaTuttiCorsoLaureaNome(corsoLaurea.getId(),annoNome);
 
             //Prendo le lezioni di quel corsoLaurea, quel resto e quell'anno
-            LezioneService lezioneService = new LezioneService();
-            List<Lezione> lezioni = lezioneService.trovaLezioniCorsoLaureaRestoAnno(corsoLaurea.getId(),resto.getId(),annoDidattico.getId());
+            final LezioneService lezioneService = new LezioneService();
+            final List<Lezione> lezioni = lezioneService.trovaLezioniCorsoLaureaRestoAnno(corsoLaurea.getId(),resto.getId(),annoDidattico.getId());
 
             lezioni.sort(Comparator.comparing(Lezione::getGiorno).thenComparing(Lezione::getOraInizio));
 
@@ -52,18 +52,18 @@ public class cercaOrario extends HttpServlet {
             request.setAttribute("anno", annoDidattico);
 
             request.getRequestDispatcher("/OrarioSingolo.jsp").forward(request, response);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             request.getServletContext().log("Error processing orario request", e);
             try {
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred processing your request");
-            } catch (IOException ioException) {
+            } catch (final IOException ioException) {
                 request.getServletContext().log("Failed to send error response", ioException);
             }
         }
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+    protected void doGet(final HttpServletRequest request, final HttpServletResponse response) {
         doPost(request, response);
     }
 

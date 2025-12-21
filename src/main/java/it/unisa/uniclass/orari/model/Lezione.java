@@ -5,11 +5,9 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.sql.Time;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
 
-import static it.unisa.uniclass.orari.model.Lezione.*;
 
 /**
  * Rappresenta una lezione nel sistema di gestione orari.
@@ -50,19 +48,19 @@ public class Lezione implements Serializable {
     /**
      * Query per trovare una lezione tramite ID
      * */
-    public final static String TROVA_LEZIONE = "Lezione.trovaLezione";
+    public static final  String TROVA_LEZIONE = "Lezione.trovaLezione";
     /**
      * Query per trovare lezioni associate a un corso specifico.
      * */
-    public final static String TROVA_LEZIONE_CORSO = "Lezione.trovaLezioneCorso";
+    public static final  String TROVA_LEZIONE_CORSO = "Lezione.trovaLezioneCorso";
     /**
      * Query per trovare lezioni in base all'orario di inizio e fine.
      * */
-    public final static String TROVA_LEZIONE_ORE = "Lezione.trovaLezioneOre";
+    public static final  String TROVA_LEZIONE_ORE = "Lezione.trovaLezioneOre";
     /**
      * Query per trovare lezioni in base all'orario e al giorno
      * */
-    public final static String TROVA_LEZIONE_ORE_GIORNO = "Lezione.trovaLezioneOreGiorno";
+    public static final String TROVA_LEZIONE_ORE_GIORNO = "Lezione.trovaLezioneOreGiorno";
     /**
      * Query per trovare lezioni in base all'aula
      * */
@@ -161,8 +159,8 @@ public class Lezione implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures true;
+      @ assignable \nothing; //NOSONAR
+      @ ensures true; //NOSONAR
       @*/
     public Lezione() {}
 
@@ -179,15 +177,15 @@ public class Lezione implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \everything;
-      @ ensures this.semestre == semestre;
-      @ ensures this.oraInizio == oraInizio;
-      @ ensures this.oraFine == oraFine;
-      @ ensures this.giorno == giorno;
-      @ ensures this.resto == resto;
-      @ ensures this.corso == corso;
-      @ ensures this.aula == aula;
-      @ ensures true;
+      @ assignable \everything; //NOSONAR
+      @ ensures this.semestre == semestre; //NOSONAR
+      @ ensures this.oraInizio == oraInizio; //NOSONAR
+      @ ensures this.oraFine == oraFine; //NOSONAR
+      @ ensures this.giorno == giorno; //NOSONAR
+      @ ensures this.resto == resto; //NOSONAR
+      @ ensures this.corso == corso; //NOSONAR
+      @ ensures this.aula == aula; //NOSONAR
+      @ ensures true; //NOSONAR
       @*/
     public Lezione(int semestre, Time oraInizio, Time oraFine, Giorno giorno, Resto resto, Corso corso, Aula aula) {
         this.oraInizio = oraInizio;
@@ -206,8 +204,8 @@ public class Lezione implements Serializable {
      */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == docenti;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == docenti; //NOSONAR
       @*/
     public /*@ nullable */ List<Docente> getDocenti() {
         return docenti;
@@ -220,8 +218,8 @@ public class Lezione implements Serializable {
      */
     /*@
       @ public normal_behavior
-      @ assignable this.docenti;
-      @ ensures this.docenti == docenti;
+      @ assignable this.docenti; //NOSONAR
+      @ ensures this.docenti == docenti; //NOSONAR
       @*/
     public void setDocenti(List<Docente> docenti) {
         this.docenti = docenti;
@@ -234,8 +232,8 @@ public class Lezione implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == semestre;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == semestre; //NOSONAR
       @*/
     public int getSemestre() {
         return semestre;
@@ -247,8 +245,8 @@ public class Lezione implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable this.semestre;
-      @ ensures this.semestre == semestre;
+      @ assignable this.semestre; //NOSONAR
+      @ ensures this.semestre == semestre; //NOSONAR
       @*/
     public void setSemestre(int semestre) {
         this.semestre = semestre;
@@ -261,8 +259,8 @@ public class Lezione implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == oraInizio;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == oraInizio; //NOSONAR
      */
     public /*@ nullable */ Time getOraInizio() {
         return oraInizio;
@@ -274,8 +272,8 @@ public class Lezione implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable this.oraInizio;
-      @ ensures this.oraInizio == oraInizio;
+      @ assignable this.oraInizio; //NOSONAR
+      @ ensures this.oraInizio == oraInizio; //NOSONAR
      */
     public void setOraInizio(Time oraInizio) {
         this.oraInizio = oraInizio;
@@ -288,8 +286,8 @@ public class Lezione implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == oraFine;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == oraFine; //NOSONAR
      */
     public /*@ nullable */ Time getOraFine() {
         return oraFine;
@@ -301,8 +299,8 @@ public class Lezione implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable this.oraFine;
-      @ ensures this.oraFine == oraFine;
+      @ assignable this.oraFine; //NOSONAR
+      @ ensures this.oraFine == oraFine; //NOSONAR
      */
     public void setOraFine(Time oraFine) {
         this.oraFine = oraFine;
@@ -315,8 +313,8 @@ public class Lezione implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == giorno;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == giorno; //NOSONAR
       @*/
     public /*@ nullable */ Giorno getGiorno() {
         return giorno;
@@ -328,8 +326,8 @@ public class Lezione implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable this.giorno;
-      @ ensures this.giorno == giorno;
+      @ assignable this.giorno; //NOSONAR
+      @ ensures this.giorno == giorno; //NOSONAR
       @*/
     public void setGiorno(Giorno giorno) {
         this.giorno = giorno;
@@ -342,8 +340,8 @@ public class Lezione implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == resto;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == resto; //NOSONAR
       @*/
     public /*@ nullable */ Resto getResto() {
         return resto;
@@ -355,8 +353,8 @@ public class Lezione implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable this.resto;
-      @ ensures this.resto == resto;
+      @ assignable this.resto; //NOSONAR
+      @ ensures this.resto == resto; //NOSONAR
       @*/
     public void setResto(Resto resto) {
         this.resto = resto;
@@ -369,8 +367,8 @@ public class Lezione implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == id;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == id; //NOSONAR
       @*/
     public /*@ nullable */ Long getId() {
         return id;
@@ -383,8 +381,8 @@ public class Lezione implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == corso;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == corso; //NOSONAR
       @*/
     public /*@ nullable */ Corso getCorso() {
         return corso;
@@ -397,8 +395,8 @@ public class Lezione implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures \result == aula;
+      @ assignable \nothing; //NOSONAR
+      @ ensures \result == aula; //NOSONAR
      */
     public /*@ nullable */ Aula getAula() {
         return aula;
@@ -410,8 +408,8 @@ public class Lezione implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable this.aula;
-      @ ensures this.aula == aula;
+      @ assignable this.aula; //NOSONAR
+      @ ensures this.aula == aula; //NOSONAR
       @*/
     public void setAula(Aula aula) {
         this.aula = aula;
@@ -423,8 +421,8 @@ public class Lezione implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable this.corso;
-      @ ensures this.corso == corso;
+      @ assignable this.corso; //NOSONAR
+      @ ensures this.corso == corso; //NOSONAR
       @*/
     public void setCorso(Corso corso) {
         this.corso = corso;

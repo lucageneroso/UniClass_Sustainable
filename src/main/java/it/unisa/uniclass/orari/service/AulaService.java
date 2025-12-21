@@ -16,7 +16,7 @@ import java.util.List;
 @Stateless
 public class AulaService {
 
-    private AulaRemote aulaDao;
+    private final AulaRemote aulaDao;
 
     /**
      * Costruttore di default che esegue il lookup JNDI del DAO.
@@ -25,9 +25,9 @@ public class AulaService {
      */
     public AulaService() throws NamingException {
         try {
-            InitialContext ctx = new InitialContext();
+            final InitialContext ctx = new InitialContext();
             this.aulaDao = (AulaRemote) ctx.lookup("java:global/UniClass-Dependability/AulaDAO");
-        } catch (NamingException e) {
+        } catch (final NamingException e) {
             throw new RuntimeException("Errore durante il lookup di AulaDAO.", e);
         }
     }
@@ -47,10 +47,10 @@ public class AulaService {
      * @param id L'ID dell'aula da cercare.
      * @return L'oggetto Aula corrispondente all'ID.
      */
-    public Aula trovaAula(int id) {
+    public Aula trovaAula(final int id) {
         try {
             return aulaDao.trovaAula(id);
-        } catch (NoResultException e) {
+        } catch (final NoResultException e) {
             return null;
         }
     }
@@ -61,10 +61,10 @@ public class AulaService {
      * @param nome Il nome dell'aula da cercare.
      * @return L'oggetto Aula corrispondente al nome.
      */
-    public Aula trovaAula(String nome) {
+    public Aula trovaAula(final String nome) {
         try {
             return aulaDao.trovaAula(nome);
-        } catch (NoResultException e) {
+        } catch (final NoResultException e) {
             return null;
         }
     }
@@ -84,7 +84,7 @@ public class AulaService {
      * @param edificio Il nome dell'edificio di cui trovare le aule.
      * @return Una lista di oggetti Aula associati all'edificio.
      */
-    public List<Aula> trovaAuleEdificio(String edificio) {
+    public List<Aula> trovaAuleEdificio(final String edificio) {
         return aulaDao.trovaAuleEdificio(edificio);
     }
 
@@ -103,7 +103,7 @@ public class AulaService {
      * @param aula L'aula da aggiungere o aggiornare.
      * @throws IllegalArgumentException Se l'argomento 'aula' è null.
      */
-    public void aggiungiAula(Aula aula) {
+    public void aggiungiAula(final Aula aula) {
         if (aula == null) {
             throw new IllegalArgumentException("Argument 'aula' must not be null");
         }
@@ -116,7 +116,7 @@ public class AulaService {
      * @param aula L'aula da rimuovere.
      * @throws IllegalArgumentException Se l'argomento 'aula' è null.
      */
-    public void rimuoviAula(Aula aula) {
+    public void rimuoviAula(final Aula aula) {
         if (aula == null) {
             throw new IllegalArgumentException("Argument 'aula' must not be null");
         }

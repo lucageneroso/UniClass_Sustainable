@@ -18,16 +18,16 @@ public class GetAttivati extends HttpServlet {
 
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+    protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) {
         try {
-            AccademicoService accademicoService = new AccademicoService();
+            final AccademicoService accademicoService = new AccademicoService();
 
-            List<Accademico> attivati = accademicoService.trovaAttivati(true);
+            final List<Accademico> attivati = accademicoService.trovaAttivati(true);
 
-            JSONArray jsonArray = new JSONArray();
+            final JSONArray jsonArray = new JSONArray();
 
-            for (Accademico accademico : attivati) {
-                JSONObject jsonUtente = new JSONObject();
+            for (final Accademico accademico : attivati) {
+                final JSONObject jsonUtente = new JSONObject();
                 jsonUtente.put("email", accademico.getEmail());
 
                 jsonArray.put(jsonUtente);
@@ -37,18 +37,18 @@ public class GetAttivati extends HttpServlet {
             resp.setCharacterEncoding("UTF-8");
 
             resp.getWriter().write(jsonArray.toString());
-        } catch (Exception e) {
+        } catch (final Exception e) {
             req.getServletContext().log("Error processing GetAttivati request", e);
             try {
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred processing your request");
-            } catch (IOException ioException) {
+            } catch (final IOException ioException) {
                 req.getServletContext().log("Failed to send error response", ioException);
             }
         }
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+    protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) {
         // Metodo intenzionalmente vuoto: questa servlet supporta solo richieste GET.
     }
 }

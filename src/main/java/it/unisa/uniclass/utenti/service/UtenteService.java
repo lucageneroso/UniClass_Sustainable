@@ -4,8 +4,6 @@ import it.unisa.uniclass.common.exceptions.AuthenticationException;
 import it.unisa.uniclass.utenti.model.Accademico;
 import it.unisa.uniclass.utenti.model.PersonaleTA;
 import it.unisa.uniclass.utenti.model.Utente;
-import it.unisa.uniclass.utenti.service.dao.AccademicoDAO;
-import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.NoResultException;
 
@@ -54,11 +52,11 @@ public class UtenteService {
      * @return L'oggetto Utente corrispondente all'email e alla password.
      * @throws AuthenticationException Se la password è errata.
      */
-    public Utente retrieveByUserAndPassword(String email, String password) {
+    public Utente retrieveByUserAndPassword(final String email, final String password) {
         try {
             // MODIFICA: Utilizzo dei metodi getter helper invece di 'new' diretto
-            PersonaleTA personaleTA = (PersonaleTA) getPersonaleTAService().trovaEmail(email);
-            Accademico accademico = (Accademico) getAccademicoService().trovaEmailUniClass(email);
+            final PersonaleTA personaleTA = (PersonaleTA) getPersonaleTAService().trovaEmail(email);
+            final Accademico accademico = (Accademico) getAccademicoService().trovaEmailUniClass(email);
             
             if (personaleTA != null) {
                 if (personaleTA.getPassword().equals(password)) {
@@ -74,7 +72,7 @@ public class UtenteService {
                 }
             }
             return null;
-        } catch (NoResultException e) {
+        } catch (final NoResultException e) {
             return null;
         }
     }
@@ -85,10 +83,10 @@ public class UtenteService {
      * @param email L'email dell'utente da cercare.
      * @return L'oggetto Utente corrispondente all'email.
      */
-    public Utente retrieveByEmail(String email) {
+    public Utente retrieveByEmail(final String email) {
         // MODIFICA: Utilizzo dei metodi getter helper invece di 'new' diretto
-        PersonaleTA personaleTA = (PersonaleTA) getPersonaleTAService().trovaEmail(email);
-        Accademico accademico = (Accademico) getAccademicoService().trovaEmailUniClass(email);
+        final PersonaleTA personaleTA = (PersonaleTA) getPersonaleTAService().trovaEmail(email);
+        final Accademico accademico = (Accademico) getAccademicoService().trovaEmailUniClass(email);
         
         if (personaleTA != null) {
             return personaleTA;

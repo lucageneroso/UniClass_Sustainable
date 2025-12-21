@@ -1,18 +1,11 @@
 package it.unisa.uniclass.orari.service;
 
 import it.unisa.uniclass.orari.model.AnnoDidattico;
-import it.unisa.uniclass.orari.model.CorsoLaurea;
-import it.unisa.uniclass.orari.model.Resto;
 import it.unisa.uniclass.orari.service.dao.AnnoDidatticoRemote;
 import jakarta.ejb.Stateless;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.NoResultException;
-import jakarta.persistence.Persistence;
-
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,16 +15,16 @@ import java.util.List;
 @Stateless
 public class AnnoDidatticoService {
 
-    public AnnoDidatticoRemote annoDidatticoDao;
+    public final AnnoDidatticoRemote annoDidatticoDao;
 
     /**
      * Costruttore di default che esegue il lookup JNDI del DAO.
      */
     public AnnoDidatticoService() {
         try {
-            InitialContext ctx = new InitialContext();
+            final InitialContext ctx = new InitialContext();
             this.annoDidatticoDao = (AnnoDidatticoRemote) ctx.lookup("java:global/UniClass-Dependability/AnnoDidatticoDAO");
-        } catch (NamingException e) {
+        } catch (final NamingException e) {
             throw new RuntimeException("Errore durante il lookup di AnnoDidatticoDAO.", e);
         }
     }
@@ -51,7 +44,7 @@ public class AnnoDidatticoService {
      * @param anno L'anno didattico da cercare.
      * @return Una lista di oggetti AnnoDidattico corrispondenti all'anno.
      */
-    public List<AnnoDidattico> trovaAnno(String anno) {
+    public List<AnnoDidattico> trovaAnno(final String anno) {
         return annoDidatticoDao.trovaAnno(anno);
     }
 
@@ -61,10 +54,10 @@ public class AnnoDidatticoService {
      * @param id L'ID dell'anno didattico da cercare.
      * @return L'oggetto AnnoDidattico corrispondente all'ID.
      */
-    public AnnoDidattico trovaId(int id) {
+    public AnnoDidattico trovaId(final int id) {
         try {
             return annoDidatticoDao.trovaId(id);
-        } catch (NoResultException e) {
+        } catch (final NoResultException e) {
             return null;
         }
     }
@@ -83,7 +76,7 @@ public class AnnoDidatticoService {
      *
      * @param annoDidattico L'anno didattico da aggiungere o aggiornare.
      */
-    public void aggiungiAnno(AnnoDidattico annoDidattico) {
+    public void aggiungiAnno(final AnnoDidattico annoDidattico) {
         annoDidatticoDao.aggiungiAnno(annoDidattico);
     }
 
@@ -92,7 +85,7 @@ public class AnnoDidatticoService {
      *
      * @param annoDidattico L'anno didattico da rimuovere.
      */
-    public void rimuoviAnno(AnnoDidattico annoDidattico) {
+    public void rimuoviAnno(final AnnoDidattico annoDidattico) {
         annoDidatticoDao.rimuoviAnno(annoDidattico);
     }
 
@@ -102,7 +95,7 @@ public class AnnoDidatticoService {
      * @param id L'ID del corso di laurea di cui trovare gli anni didattici.
      * @return Una lista di oggetti AnnoDidattico associati al corso di laurea.
      */
-    public List<AnnoDidattico> trovaTuttiCorsoLaurea(long id) {
+    public List<AnnoDidattico> trovaTuttiCorsoLaurea(final long id) {
         return annoDidatticoDao.trovaTuttiCorsoLaurea(id);
     }
 
@@ -113,10 +106,10 @@ public class AnnoDidatticoService {
      * @param anno L'anno didattico da cercare.
      * @return L'oggetto AnnoDidattico corrispondente all'ID del corso e all'anno.
      */
-    public AnnoDidattico trovaTuttiCorsoLaureaNome(long id, String anno) {
+    public AnnoDidattico trovaTuttiCorsoLaureaNome(final long id, final String anno) {
         try {
             return annoDidatticoDao.trovaCorsoLaureaNome(id, anno);
-        } catch (NoResultException e) {
+        } catch (final NoResultException e) {
             return null;
         }
     }

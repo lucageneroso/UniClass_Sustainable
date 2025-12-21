@@ -17,16 +17,16 @@ import java.util.List;
 @Stateless
 public class RestoService {
 
-    private RestoRemote restoDao;
+    private final RestoRemote restoDao;
 
     /**
      * Costruttore di default che esegue il lookup JNDI del DAO.
      */
     public RestoService() {
         try {
-            InitialContext ctx = new InitialContext();
+            final InitialContext ctx = new InitialContext();
             this.restoDao = (RestoRemote) ctx.lookup("java:global/UniClass-Dependability/RestoDAO");
-        } catch (NamingException e) {
+        } catch (final NamingException e) {
             throw new RuntimeException("Errore durante il lookup di RestoDAO", e);
         }
     }
@@ -46,7 +46,7 @@ public class RestoService {
      * @param corsoLaurea Il corso di laurea di cui trovare i resti.
      * @return Una lista di oggetti Resto associati al corso di laurea.
      */
-    public List<Resto> trovaRestiCorsoLaurea(CorsoLaurea corsoLaurea) {
+    public List<Resto> trovaRestiCorsoLaurea(final CorsoLaurea corsoLaurea) {
         return restoDao.trovaRestiCorsoLaurea(corsoLaurea);
     }
 
@@ -56,7 +56,7 @@ public class RestoService {
      * @param nomeCorsoLaurea Il nome del corso di laurea di cui trovare i resti.
      * @return Una lista di oggetti Resto associati al corso di laurea.
      */
-    public List<Resto> trovaRestiCorsoLaurea(String nomeCorsoLaurea) {
+    public List<Resto> trovaRestiCorsoLaurea(final String nomeCorsoLaurea) {
         return restoDao.trovaRestiCorsoLaurea(nomeCorsoLaurea);
     }
 
@@ -66,7 +66,7 @@ public class RestoService {
      * @param nomeResto Il nome del resto da cercare.
      * @return Una lista di oggetti Resto corrispondenti al nome.
      */
-    public List<Resto> trovaResto(String nomeResto) {
+    public List<Resto> trovaResto(final String nomeResto) {
         return restoDao.trovaResto(nomeResto);
     }
 
@@ -76,10 +76,10 @@ public class RestoService {
      * @param id L'ID del resto da cercare.
      * @return L'oggetto Resto corrispondente all'ID.
      */
-    public Resto trovaResto(long id) {
+    public Resto trovaResto(final long id) {
         try {
             return restoDao.trovaResto(id);
-        } catch (NoResultException e) {
+        } catch (final NoResultException e) {
             return null;
         }
     }
@@ -91,10 +91,10 @@ public class RestoService {
      * @param corso Il corso di laurea associato al resto.
      * @return L'oggetto Resto corrispondente al nome e al corso.
      */
-    public Resto trovaRestoNomeCorso(String nomeResto, CorsoLaurea corso) {
+    public Resto trovaRestoNomeCorso(final String nomeResto, final CorsoLaurea corso) {
         try {
             return restoDao.trovaRestoNomeCorso(nomeResto, corso);
-        } catch (NoResultException e) {
+        } catch (final NoResultException e) {
             return null;
         }
     }
@@ -106,10 +106,10 @@ public class RestoService {
      * @param nomeCorso Il nome del corso di laurea associato al resto.
      * @return L'oggetto Resto corrispondente al nome e al corso.
      */
-    public Resto trovaRestoNomeCorso(String nomeResto, String nomeCorso) {
+    public Resto trovaRestoNomeCorso(final String nomeResto, final String nomeCorso) {
         try {
             return restoDao.trovaRestoNomeCorso(nomeResto, nomeCorso);
-        } catch (NoResultException e) {
+        } catch (final NoResultException e) {
             return null;
         }
     }
@@ -119,7 +119,7 @@ public class RestoService {
      *
      * @param resto Il resto da aggiungere o aggiornare.
      */
-    public void aggiungiResto(Resto resto) {
+    public void aggiungiResto(final Resto resto) {
         if (resto != null) {
             restoDao.aggiungiResto(resto);
         }
@@ -130,7 +130,7 @@ public class RestoService {
      *
      * @param resto Il resto da rimuovere.
      */
-    public void rimuoviResto(Resto resto) {
+    public void rimuoviResto(final Resto resto) {
         if (resto != null) {
             restoDao.rimuoviResto(resto);
         }

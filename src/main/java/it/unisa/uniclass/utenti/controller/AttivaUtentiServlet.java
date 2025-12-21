@@ -31,19 +31,19 @@ public class AttivaUtentiServlet extends HttpServlet {
     }
 
     // Metodo pubblico per i test
-    public void doPostPublic(HttpServletRequest req, HttpServletResponse resp) {
+    public void doPostPublic(final HttpServletRequest req, final HttpServletResponse resp) {
         doPost(req, resp);
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+    protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) {
         doPost(req, resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+    protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) {
         try {
-            String param = req.getParameter("param");
+            final String param = req.getParameter("param");
 
             if ("add".equals(param)) {
                 handleAdd(req, resp);
@@ -51,12 +51,12 @@ public class AttivaUtentiServlet extends HttpServlet {
                 handleRemove(req, resp);
             }
 
-        } catch (IOException e) {
+        } catch (final IOException e) {
             req.getServletContext().log("Error processing user activation request", e);
             try {
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
                         "An error occurred processing your request");
-            } catch (IOException ioException) {
+            } catch (final IOException ioException) {
                 req.getServletContext().log("Failed to send error response", ioException);
             }
         }
@@ -66,20 +66,20 @@ public class AttivaUtentiServlet extends HttpServlet {
     //        METODI PRIVATI
     // -----------------------------
 
-    private void handleAdd(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String email = req.getParameter("email");
-        String matricola = req.getParameter("matricola");
-        String tiporeq = req.getParameter("tipo");
+    private void handleAdd(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
+        final String email = req.getParameter("email");
+        final String matricola = req.getParameter("matricola");
+        final String tiporeq = req.getParameter("tipo");
 
-        Accademico accEmail = accademicoService.trovaEmailUniClass(email);
-        Accademico accMatricola = accademicoService.trovaAccademicoUniClass(matricola);
+        final Accademico accEmail = accademicoService.trovaEmailUniClass(email);
+        final Accademico accMatricola = accademicoService.trovaAccademicoUniClass(matricola);
 
         if (!isSameAccademico(accEmail, accMatricola)) {
             redirectError(resp, req);
             return;
         }
 
-        Tipo tipo = parseTipo(tiporeq);
+        final Tipo tipo = parseTipo(tiporeq);
         if (tipo == null || !accEmail.getTipo().equals(tipo)) {
             redirectError(resp, req);
             return;
@@ -89,10 +89,10 @@ public class AttivaUtentiServlet extends HttpServlet {
         resp.sendRedirect(req.getContextPath() + "/PersonaleTA/AttivaUtenti.jsp");
     }
 
-    private void handleRemove(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String email = req.getParameter("email-remove");
+    private void handleRemove(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
+        final String email = req.getParameter("email-remove");
 
-        Accademico accademico = accademicoService.trovaEmailUniClass(email);
+        final Accademico accademico = accademicoService.trovaEmailUniClass(email);
         if (accademico != null) {
             accademicoService.cambiaAttivazione(accademico, false);
         }
@@ -100,13 +100,13 @@ public class AttivaUtentiServlet extends HttpServlet {
         resp.sendRedirect(req.getContextPath() + "/PersonaleTA/AttivaUtenti.jsp");
     }
 
-    private boolean isSameAccademico(Accademico a1, Accademico a2) {
+    private boolean isSameAccademico(final Accademico a1, final Accademico a2) {
         return a1 != null && a2 != null &&
                 a1.getEmail().equals(a2.getEmail()) &&
                 a1.getMatricola().equals(a2.getMatricola());
     }
 
-    private Tipo parseTipo(String tiporeq) {
+    private Tipo parseTipo(final String tiporeq) {
         switch (tiporeq) {
             case "Studente": return Tipo.Studente;
             case "Docente": return Tipo.Docente;
@@ -115,8 +115,8 @@ public class AttivaUtentiServlet extends HttpServlet {
         }
     }
 
-    private void activateAccademico(Accademico accademico, HttpServletRequest req) {
-        String password = PasswordGenerator.generatePassword(8);
+    private void activateAccademico(final Accademico accademico, final HttpServletRequest req) {
+        final String password = PasswordGenerator.generatePassword(8);
 
         accademico.setAttivato(true);
         accademico.setPassword(CredentialSecurity.hashPassword(password));
@@ -127,7 +127,7 @@ public class AttivaUtentiServlet extends HttpServlet {
         req.getServletContext().log("Password generata per l'attivato: " + password);
     }
 
-    private void redirectError(HttpServletResponse resp, HttpServletRequest req) throws IOException {
+    private void redirectError(final HttpServletResponse resp, final HttpServletRequest req) throws IOException {
         resp.sendRedirect(req.getContextPath() + "/PersonaleTA/AttivaUtenti.jsp?action=error");
     }
 }

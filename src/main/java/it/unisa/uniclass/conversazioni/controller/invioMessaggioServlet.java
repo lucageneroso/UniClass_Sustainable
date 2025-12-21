@@ -52,27 +52,27 @@ public class invioMessaggioServlet extends HttpServlet {
      * Gestisce le richieste GET per inviare un messaggio o un avviso.
      */
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) {
+    public void doGet(final HttpServletRequest request, final HttpServletResponse response) {
         try {
-            HttpSession session = request.getSession();
+            final HttpSession session = request.getSession();
 
-            String emailSession = (String) session.getAttribute("utenteEmail");
-            String emailDest = request.getParameter("email");
-            String messaggio = request.getParameter("testo");
-            String topic = request.getParameter("topic");
+            final String emailSession = (String) session.getAttribute("utenteEmail");
+            final String emailDest = request.getParameter("email");
+            final String messaggio = request.getParameter("testo");
+            final String topic = request.getParameter("topic");
 
             LOGGER.info("Topic ricevuto: {}", topic);
 
-            Accademico accademicoSelf = accademicoService.trovaEmailUniClass(emailSession);
-            Accademico accademicoDest = accademicoService.trovaEmailUniClass(emailDest);
+            final Accademico accademicoSelf = accademicoService.trovaEmailUniClass(emailSession);
+            final Accademico accademicoDest = accademicoService.trovaEmailUniClass(emailDest);
 
-            Topic top = new Topic();
+            final Topic top = new Topic();
             if (topic != null) {
                 top.setNome(topic);
                 top.setCorsoLaurea(accademicoSelf.getCorsoLaurea());
             }
 
-            Messaggio messaggio1 = new Messaggio();
+            final Messaggio messaggio1 = new Messaggio();
             messaggio1.setAutore(accademicoSelf);
             messaggio1.setDestinatario(accademicoDest);
             messaggio1.setBody(messaggio);
@@ -82,12 +82,12 @@ public class invioMessaggioServlet extends HttpServlet {
                 messaggio1.setTopic(top);
             }
 
-            Messaggio test = messaggioService.aggiungiMessaggio(messaggio1);
-            Long messageId = test.getId();
+            final Messaggio test = messaggioService.aggiungiMessaggio(messaggio1);
+            final Long messageId = test.getId();
 
             LOGGER.info("Messaggio ID: {} - {}", messageId, test);
 
-            List<Messaggio> messaggi = messaggioService.trovaTutti();
+            final List<Messaggio> messaggi = messaggioService.trovaTutti();
             LOGGER.info("Messaggi trovati: {}", messaggi);
 
             request.setAttribute("messaggi", messaggi);
@@ -96,12 +96,12 @@ public class invioMessaggioServlet extends HttpServlet {
 
             response.sendRedirect("Conversazioni");
 
-        } catch (IOException e) {
+        } catch (final IOException e) {
             request.getServletContext().log("Error processing message sending request", e);
             try {
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
                         "An error occurred processing your request");
-            } catch (IOException ioException) {
+            } catch (final IOException ioException) {
                 request.getServletContext().log("Failed to send error response", ioException);
             }
         }
@@ -111,7 +111,7 @@ public class invioMessaggioServlet extends HttpServlet {
      * Gestisce le richieste POST delegando al metodo doGet.
      */
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
+    public void doPost(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
     }

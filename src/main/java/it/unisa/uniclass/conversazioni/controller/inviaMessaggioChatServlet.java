@@ -59,31 +59,31 @@ public class inviaMessaggioChatServlet extends HttpServlet {
      */
 
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) {
+    public void doGet(final HttpServletRequest request, final HttpServletResponse response) {
         try {
-            HttpSession session = request.getSession();
+            final HttpSession session = request.getSession();
 
             // Email attuale (autore del messaggio)
-            String emailSession = (String) session.getAttribute("utenteEmail");
+            final String emailSession = (String) session.getAttribute("utenteEmail");
 
             // Email di destinazione
-            String emailDest = request.getParameter("emailInvio");
+            final String emailDest = request.getParameter("emailInvio");
             logger.debug("Lo sto inviando a: {}", emailDest);
             // Messaggio da inviare
-            String messaggio = request.getParameter("testo");
+            final String messaggio = request.getParameter("testo");
             logger.debug("Guarda che messaggio: {}", messaggio);
 
 
-            Accademico accademicoSelf = accademicoService.trovaEmailUniClass(emailSession);
-            Accademico accademicoDest = accademicoService.trovaEmailUniClass(emailDest);
+            final Accademico accademicoSelf = accademicoService.trovaEmailUniClass(emailSession);
+            final Accademico accademicoDest = accademicoService.trovaEmailUniClass(emailDest);
 
 
-            Topic top = new Topic();
+            final Topic top = new Topic();
             top.setCorsoLaurea(accademicoSelf.getCorsoLaurea());
             top.setNome("VUOTO");
 
             // Crea un nuovo messaggio
-            Messaggio messaggio1 = new Messaggio();
+            final Messaggio messaggio1 = new Messaggio();
             messaggio1.setAutore(accademicoSelf);
             messaggio1.setDestinatario(accademicoDest);
             messaggio1.setBody(messaggio);
@@ -95,16 +95,16 @@ public class inviaMessaggioChatServlet extends HttpServlet {
             messaggioService.aggiungiMessaggio(messaggio1);
 
 
-            List<Messaggio> messaggi = messaggioService.trovaTutti();
+            final List<Messaggio> messaggi = messaggioService.trovaTutti();
 
             request.setAttribute("messaggi", messaggi);
             request.setAttribute("accademici", messaggioService.trovaMessaggeriDiUnAccademico(accademicoSelf.getMatricola()));
             response.sendRedirect("chatServlet?accademico="+accademicoDest.getEmail()+"&accademicoSelf="+accademicoSelf.getEmail());
-        } catch (IOException e) {
+        } catch (final IOException e) {
             request.getServletContext().log("Error processing chat message request", e);
             try {
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred processing your request");
-            } catch (IOException ioException) {
+            } catch (final IOException ioException) {
                 request.getServletContext().log("Failed to send error response", ioException);
             }
         }
@@ -117,7 +117,7 @@ public class inviaMessaggioChatServlet extends HttpServlet {
      */
 
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 }

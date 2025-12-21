@@ -7,54 +7,81 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.naming.*;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NameClassPair;
+import javax.naming.NamingEnumeration;
 import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/Home")
 public class IndexServlet extends HttpServlet {
 
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(IndexServlet.class);
 
+    private void listJNDI(final Context ctx, final String name) throws Exception {
+        final NamingEnumeration<NameClassPair> list = ctx.list(name);
 
-    private void listJNDI(Context ctx, String name) throws Exception {
-        NamingEnumeration<NameClassPair> list = ctx.list(name);
         while (list.hasMore()) {
-            NameClassPair nc = list.next();
-            String fullName = name + (name.endsWith("/") ? "" : "/") + nc.getName();
-            System.out.println("JNDI Name: " + fullName);
+            final NameClassPair nc = list.next();
+            final String fullName =
+                    name + (name.endsWith("/") ? "" : "/") + nc.getName();
+
+            LOGGER.info("JNDI Name: {}", fullName);
+
             try {
-                // recursive call to list subcontexts
                 listJNDI(ctx, fullName);
-            } catch (Exception e) {
-                // ignore if not a context
+            } catch (final Exception e) {
+                // not a subcontext, ignore
             }
         }
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(
+            final HttpServletRequest request,
+            final HttpServletResponse response)
+            throws ServletException, IOException {
+
         try {
-            Context ctx = new InitialContext();
-            System.out.println("---- Listing JNDI java:global ----");
+            final Context ctx = new InitialContext();
+            LOGGER.info("---- Listing JNDI java:global ----");
             listJNDI(ctx, "java:global");
-            System.out.println("---- End JNDI listing ----");
-        } catch (Exception e) {
-            request.getServletContext().log("Error listing JNDI resources", e);
+            LOGGER.info("---- End JNDI listing ----");
+        } catch ( final Exception e) {
+            request.getServletContext()
+                    .log("Error listing JNDI resources", e);
         }
 
         try {
-            CorsoLaureaService corsoLaureaService = new CorsoLaureaService();
-            List<CorsoLaurea> corsi = corsoLaureaService.trovaTutti();
-            System.out.println(corsi);
+            final CorsoLaureaService corsoLaureaService =
+                    new CorsoLaureaService();
+
+            final List<CorsoLaurea> corsi =
+                    corsoLaureaService.trovaTutti();
+
+            LOGGER.info("Corsi trovati: {}", corsi);
+
             request.setAttribute("corsi", corsi);
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        } catch (Exception e) {
-            request.getServletContext().log("Error retrieving courses", e);
+            request.getRequestDispatcher("index.jsp")
+                    .forward(request, response);
+
+        } catch (final Exception e) {
+            request.getServletContext()
+                    .log("Error retrieving courses", e);
+
             try {
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred processing your request");
-            } catch (IOException ioException) {
-                request.getServletContext().log("Failed to send error response", ioException);
+                response.sendError(
+                        HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+                        "An error occurred processing your request"
+                );
+            } catch (final IOException ioException) {
+                request.getServletContext()
+                        .log("Failed to send error response", ioException);
             }
         }
     }

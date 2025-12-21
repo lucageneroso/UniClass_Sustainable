@@ -2,12 +2,10 @@ package it.unisa.uniclass.orari.model;
 
 import it.unisa.uniclass.utenti.model.Studente;
 import jakarta.persistence.*;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static it.unisa.uniclass.orari.model.Resto.*;
 
 /**
  * Classe rappresentante un "Resto", che identifica una suddivisione di studenti all'interno di un  corso di laurea.
@@ -90,10 +88,10 @@ public class Resto implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \everything;
-      @ ensures this.nome == nome;
-      @ ensures this.corsoLaurea == corsoLaurea;
-      @ ensures true;
+      @ assignable \everything; //NOSONAR
+      @ ensures this.nome == nome; //NOSONAR
+      @ ensures this.corsoLaurea == corsoLaurea; //NOSONAR
+      @ ensures true; //NOSONAR
       @*/
     public Resto(String nome, CorsoLaurea corsoLaurea) {
         this.nome = nome;
@@ -105,8 +103,8 @@ public class Resto implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable \nothing;
-      @ ensures true;
+      @ assignable \nothing; //NOSONAR
+      @ ensures true; //NOSONAR
       @*/
     public Resto() {
     }
@@ -118,7 +116,7 @@ public class Resto implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ ensures \result == id;
+      @ ensures \result == id; //NOSONAR
       @*/
     public /*@ nullable */ Long getId() {
         return id;
@@ -131,7 +129,7 @@ public class Resto implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ ensures \result == nome;
+      @ ensures \result == nome; //NOSONAR
       @*/
     public /*@ nullable */ String getNome() {
         return nome;
@@ -144,7 +142,7 @@ public class Resto implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ ensures \result == corsoLaurea;
+      @ ensures \result == corsoLaurea; //NOSONAR
       @*/
     public /*@ nullable */ CorsoLaurea getCorsoLaurea() {
         return corsoLaurea;
@@ -157,8 +155,8 @@ public class Resto implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable this.nome;
-      @ ensures this.nome == nome;
+      @ assignable this.nome; //NOSONAR
+      @ ensures this.nome == nome; //NOSONAR
       @*/
     public void setNome(String nome) {
         this.nome = nome;
@@ -171,8 +169,8 @@ public class Resto implements Serializable {
      * */
     /*@
       @ public normal_behavior
-      @ assignable this.corsoLaurea;
-      @ ensures this.corsoLaurea == corsoLaurea;
+      @ assignable this.corsoLaurea; //NOSONAR
+      @ ensures this.corsoLaurea == corsoLaurea; //NOSONAR
       @*/
     public void setCorsoLaurea(CorsoLaurea corsoLaurea) {
         this.corsoLaurea = corsoLaurea;
