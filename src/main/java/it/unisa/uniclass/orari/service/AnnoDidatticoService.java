@@ -25,7 +25,8 @@ public class AnnoDidatticoService {
             final InitialContext ctx = new InitialContext();
             this.annoDidatticoDao = (AnnoDidatticoRemote) ctx.lookup("java:global/UniClass-Dependability/AnnoDidatticoDAO");
         } catch (final NamingException e) {
-            throw new RuntimeException("Errore durante il lookup di AnnoDidatticoDAO.", e);
+            // FIX java:S112 - Usa un'eccezione specifica invece di RuntimeException generica
+            throw new IllegalStateException("Errore durante il lookup di AnnoDidatticoDAO.", e);
         }
     }
 

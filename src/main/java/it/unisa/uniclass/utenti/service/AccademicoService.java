@@ -8,6 +8,8 @@ import jakarta.persistence.NoResultException;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Classe di servizio per la gestione delle operazioni relative agli accademici.
@@ -16,6 +18,9 @@ import java.util.List;
 @Stateless
 public class AccademicoService {
 
+    // FIX java:S106 - Utilizzo di un Logger invece di System.out
+    private static final Logger LOGGER = Logger.getLogger(AccademicoService.class.getName());
+
     private final AccademicoRemote accademicoDao;
 
     /**
@@ -23,14 +28,17 @@ public class AccademicoService {
      */
     public AccademicoService() {
         try {
-            System.out.println(" ATTENZIONE: Sto facendo la lookup JNDI del DAO! ");
+            // FIX java:S106 - Loggare tramite Logger
+            LOGGER.log(Level.INFO, "ATTENZIONE: Sto facendo la lookup JNDI del DAO!");
+
             final InitialContext ctx = new InitialContext();
             accademicoDao = (AccademicoRemote) ctx.lookup("java:global/UniClass-Dependability/AccademicoDAO");
         } catch (final NamingException e) {
-            throw new RuntimeException("Errore durante il lookup di AccademicoDAO", e);
+            // FIX java:S112 - Utilizzo di IllegalStateException invece di RuntimeException generica
+            throw new IllegalStateException("Errore durante il lookup di AccademicoDAO", e);
         }
     }
-    
+
     /**
      * Costruttore per i Test.
      * @param dao Il DAO mockato.
@@ -38,7 +46,7 @@ public class AccademicoService {
     public AccademicoService(AccademicoRemote dao){
         this.accademicoDao = dao;
     }
-    
+
 
     /**
      * Trova un accademico nel database utilizzando la sua matricola.

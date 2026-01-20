@@ -26,7 +26,8 @@ public class LezioneService {
             final InitialContext ctx = new InitialContext();
             this.lezioneDao = (LezioneRemote) ctx.lookup("java:global/UniClass-Dependability/LezioneDAO");
         } catch (final NamingException e) {
-            throw new RuntimeException("Errore durante il lookup di LezioneDAO.", e);
+            // FIX java:S112 - Usa IllegalStateException invece di RuntimeException
+            throw new IllegalStateException("Errore durante il lookup di LezioneDAO.", e);
         }
     }
 

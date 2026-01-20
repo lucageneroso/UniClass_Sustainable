@@ -15,7 +15,7 @@
 
     <display-name>UniClass</display-name>
     <welcome-file-list>
-        <welcome-file>/Home</welcome-file>
+        <welcome-file>Home</welcome-file>
     </welcome-file-list>
 
     <filter>

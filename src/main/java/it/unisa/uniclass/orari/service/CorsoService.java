@@ -20,15 +20,15 @@ public class CorsoService {
 
     /**
      * Costruttore di default che esegue il lookup JNDI del DAO.
-     *
-     * @throws NamingException Se si verifica un errore durante il lookup JNDI.
      */
-    public CorsoService() throws NamingException {
+    public CorsoService() {
         try {
             final InitialContext ctx = new InitialContext();
             this.corsoDao = (CorsoRemote) ctx.lookup("java:global/UniClass-Dependability/CorsoDAO");
         } catch (final NamingException e) {
-            throw new RuntimeException("Errore durante il lookup di CorsoDAO", e);
+            // FIX java:S112 - Usa IllegalStateException invece di RuntimeException
+            // Rimosso anche "throws NamingException" dalla firma del metodo
+            throw new IllegalStateException("Errore durante il lookup di CorsoDAO", e);
         }
     }
 

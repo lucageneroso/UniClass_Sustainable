@@ -31,7 +31,8 @@ public class StudenteService {
             final InitialContext ctx = new InitialContext();
             studenteDao = (StudenteRemote) ctx.lookup("java:global/UniClass-Dependability/StudenteDAO");
         } catch (final NamingException e) {
-            throw new RuntimeException("Errore durante il lookup di StudenteDAO", e);
+            // FIX java:S112 - Usa IllegalStateException invece di RuntimeException
+            throw new IllegalStateException("Errore durante il lookup di StudenteDAO", e);
         }
     }
 

@@ -25,7 +25,8 @@ public class CorsoLaureaService {
             final InitialContext ctx = new InitialContext();
             this.corsoLaureaDAO = (CorsoLaureaRemote) ctx.lookup("java:global/UniClass-Dependability/CorsoLaureaDAO!it.unisa.uniclass.orari.service.dao.CorsoLaureaRemote");
         } catch (final NamingException e) {
-            throw new RuntimeException("Errore durante il lookup di CorsoLaureaDAO.", e);
+            // FIX java:S112 - Usa IllegalStateException invece di RuntimeException
+            throw new IllegalStateException("Errore durante il lookup di CorsoLaureaDAO.", e);
         }
     }
 
@@ -75,7 +76,8 @@ public class CorsoLaureaService {
         try {
             return corsoLaureaDAO.trovaTutti();
         } catch (final Exception e) {
-            throw new RuntimeException("Errore durante il recupero dei corsi di laurea.", e);
+            // FIX java:S112 - Usa IllegalStateException invece di RuntimeException
+            throw new IllegalStateException("Errore durante il recupero dei corsi di laurea.", e);
         }
     }
 

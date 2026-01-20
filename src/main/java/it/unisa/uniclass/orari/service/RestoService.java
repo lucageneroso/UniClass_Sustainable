@@ -27,7 +27,8 @@ public class RestoService {
             final InitialContext ctx = new InitialContext();
             this.restoDao = (RestoRemote) ctx.lookup("java:global/UniClass-Dependability/RestoDAO");
         } catch (final NamingException e) {
-            throw new RuntimeException("Errore durante il lookup di RestoDAO", e);
+            // FIX java:S112 - Usa IllegalStateException invece di RuntimeException
+            throw new IllegalStateException("Errore durante il lookup di RestoDAO", e);
         }
     }
 

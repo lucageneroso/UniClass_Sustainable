@@ -26,11 +26,10 @@ public class PersonaleTAService {
             final InitialContext ctx = new InitialContext();
             personaleTAdao = (PersonaleTARemote) ctx.lookup("java:global/UniClass-Dependability/PersonaleTADAO");
         } catch (final NamingException e) {
-            throw new RuntimeException("Errore durante il lookup di PersonaleTADAO", e);
+            // FIX java:S112 - Usa IllegalStateException invece di RuntimeException
+            throw new IllegalStateException("Errore durante il lookup di PersonaleTADAO", e);
         }
     }
-
-
 
     /**
      * Costruttore per i Test (Dependency Injection).
@@ -40,6 +39,7 @@ public class PersonaleTAService {
     public PersonaleTAService(PersonaleTARemote dao) {
         this.personaleTAdao = dao;
     }
+
     /**
      * Trova un membro del personale tecnico-amministrativo nel database utilizzando il suo ID.
      *

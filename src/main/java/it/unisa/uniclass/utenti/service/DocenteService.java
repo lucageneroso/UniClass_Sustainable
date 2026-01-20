@@ -30,7 +30,8 @@ public class DocenteService {
             final InitialContext ctx = new InitialContext();
             docenteDao = (DocenteRemote) ctx.lookup("java:global/UniClass-Dependability/DocenteDAO");
         } catch (final NamingException e) {
-            throw new RuntimeException("Errore durante il lookup di DocenteDAO", e);
+            // FIX java:S112 - Usa IllegalStateException invece di RuntimeException
+            throw new IllegalStateException("Errore durante il lookup di DocenteDAO", e);
         }
     }
     private AccademicoService accademicoService; // Campo DI per test
@@ -135,5 +136,4 @@ public class DocenteService {
             throw new NotFoundUserException("Il docente inserito non è presente nel Database universitario");
         }
     }
-
 }

@@ -20,15 +20,15 @@ public class AulaService {
 
     /**
      * Costruttore di default che esegue il lookup JNDI del DAO.
-     *
-     * @throws NamingException Se si verifica un errore durante il lookup JNDI.
      */
-    public AulaService() throws NamingException {
+    public AulaService() {
         try {
             final InitialContext ctx = new InitialContext();
             this.aulaDao = (AulaRemote) ctx.lookup("java:global/UniClass-Dependability/AulaDAO");
         } catch (final NamingException e) {
-            throw new RuntimeException("Errore durante il lookup di AulaDAO.", e);
+            // FIX java:S112 - Usa IllegalStateException invece di RuntimeException
+            // Rimosso anche "throws NamingException" dalla firma poiché l'eccezione è gestita qui.
+            throw new IllegalStateException("Errore durante il lookup di AulaDAO.", e);
         }
     }
 
