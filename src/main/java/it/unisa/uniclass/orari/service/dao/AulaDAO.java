@@ -24,7 +24,7 @@ public class AulaDAO implements AulaRemote {
      */
     @Override
     public Aula trovaAula(int id) {
-        TypedQuery<Aula> query = emUniClass.createNamedQuery(Aula.TROVA_AULA, Aula.class);
+        final TypedQuery<Aula> query = emUniClass.createNamedQuery(Aula.TROVA_AULA, Aula.class);
         query.setParameter("id", id);
         return query.getSingleResult();
     }
@@ -37,7 +37,7 @@ public class AulaDAO implements AulaRemote {
      */
     @Override
     public Aula trovaAula(String nome) {
-        TypedQuery<Aula> query = emUniClass.createNamedQuery(Aula.TROVA_AULANOME, Aula.class);
+        final TypedQuery<Aula> query = emUniClass.createNamedQuery(Aula.TROVA_AULANOME, Aula.class);
         query.setParameter("nome", nome);
         return query.getSingleResult();
     }
@@ -49,7 +49,7 @@ public class AulaDAO implements AulaRemote {
      */
     @Override
     public List<Aula> trovaTutte() {
-        TypedQuery<Aula> query = emUniClass.createNamedQuery(Aula.TROVA_TUTTE, Aula.class);
+        final TypedQuery<Aula> query = emUniClass.createNamedQuery(Aula.TROVA_TUTTE, Aula.class);
         return query.getResultList();
     }
 
@@ -61,7 +61,7 @@ public class AulaDAO implements AulaRemote {
      */
     @Override
     public List<Aula> trovaAuleEdificio(String edificio) {
-        TypedQuery<Aula> query = emUniClass.createNamedQuery(Aula.TROVA_AULA_EDIFICIO, Aula.class);
+        final TypedQuery<Aula> query = emUniClass.createNamedQuery(Aula.TROVA_AULA_EDIFICIO, Aula.class);
         query.setParameter("edificio", edificio);
         return query.getResultList();
     }
@@ -73,7 +73,7 @@ public class AulaDAO implements AulaRemote {
      */
     @Override
     public List<String> trovaEdifici() {
-        TypedQuery<String> query = emUniClass.createNamedQuery(Aula.TROVA_EDIFICI, String.class);
+        final TypedQuery<String> query = emUniClass.createNamedQuery(Aula.TROVA_EDIFICI, String.class);
         return query.getResultList();
     }
 

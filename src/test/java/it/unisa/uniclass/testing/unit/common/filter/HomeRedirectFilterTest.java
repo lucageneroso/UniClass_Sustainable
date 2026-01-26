@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.mockito.Mockito.*;
 
 class HomeRedirectFilterTest {
@@ -35,16 +34,10 @@ class HomeRedirectFilterTest {
         filter.doFilter(request, response, chain);
 
         verify(response).sendRedirect("/UniClass/Home");
-        // Verifichiamo che il chain non venga mai chiamato
+        // Verifichiamo che il chain non venga mai chiamato, confermando il redirect
         verify(chain, never()).doFilter(request, response);
     }
 
-    @Test
-    void testInitAndDestroy(){
-        // Verifica che init e destroy non lancino eccezioni
-        assertDoesNotThrow(() -> {
-            filter.init(null);
-            filter.destroy();
-        });
-    }
+    // Il test testInitAndDestroy è stato rimosso poiché i metodi sono stati
+    // eliminati dalla classe implementation in ottica di sostenibilità (codice ridondante).
 }

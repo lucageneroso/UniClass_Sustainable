@@ -25,7 +25,7 @@ public class StudenteDAO implements StudenteRemote {
      */
     @Override
     public Studente trovaStudenteUniClass(String matricola) {
-        TypedQuery<Studente> query = emUniClass.createNamedQuery(Studente.TROVA_STUDENTE, Studente.class);
+        final TypedQuery<Studente> query = emUniClass.createNamedQuery(Studente.TROVA_STUDENTE, Studente.class);
         query.setParameter("matricola", matricola);
         return (Studente) query.getSingleResult();
     }
@@ -38,7 +38,7 @@ public class StudenteDAO implements StudenteRemote {
      */
     @Override
     public List<Studente> trovaStudentiCorso(CorsoLaurea corsoLaurea) {
-        TypedQuery<Studente> query = emUniClass.createNamedQuery(Studente.TROVA_STUDENTI_CORSO, Studente.class);
+        final TypedQuery<Studente> query = emUniClass.createNamedQuery(Studente.TROVA_STUDENTI_CORSO, Studente.class);
         query.setParameter("corso", corsoLaurea.getNome());
         return query.getResultList();
     }
@@ -50,7 +50,7 @@ public class StudenteDAO implements StudenteRemote {
      */
     @Override
     public List<Studente> trovaTuttiUniClass() {
-        TypedQuery<Studente> query = emUniClass.createNamedQuery(Studente.TROVA_TUTTI, Studente.class);
+        final TypedQuery<Studente> query = emUniClass.createNamedQuery(Studente.TROVA_TUTTI, Studente.class);
         return query.getResultList();
     }
 
@@ -62,7 +62,7 @@ public class StudenteDAO implements StudenteRemote {
      */
     @Override
     public Studente trovaStudenteEmailUniClass(String email) {
-        TypedQuery<Studente> query = emUniClass.createNamedQuery(Studente.TROVA_EMAIL, Studente.class);
+        final TypedQuery<Studente> query = emUniClass.createNamedQuery(Studente.TROVA_EMAIL, Studente.class);
         query.setParameter("email", email);
         return (Studente) query.getSingleResult();
     }

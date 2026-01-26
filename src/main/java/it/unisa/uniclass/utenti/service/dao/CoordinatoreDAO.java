@@ -24,7 +24,7 @@ public class CoordinatoreDAO implements CoordinatoreRemote {
      */
     @Override
     public Coordinatore trovaCoordinatoreEmailUniclass(String email) {
-        TypedQuery<Coordinatore> query = emUniClass.createNamedQuery(Coordinatore.TROVA_EMAIL, Coordinatore.class);
+        final TypedQuery<Coordinatore> query = emUniClass.createNamedQuery(Coordinatore.TROVA_EMAIL, Coordinatore.class);
         query.setParameter("email", email);
         return query.getSingleResult();
     }
@@ -37,7 +37,7 @@ public class CoordinatoreDAO implements CoordinatoreRemote {
      */
     @Override
     public Coordinatore trovaCoordinatoreUniClass(String matricola) {
-        TypedQuery<Coordinatore> query = emUniClass.createQuery(Coordinatore.TROVA_COORDINATORE, Coordinatore.class);
+        final TypedQuery<Coordinatore> query = emUniClass.createQuery(Coordinatore.TROVA_COORDINATORE, Coordinatore.class);
         query.setParameter("matricola", matricola);
         return query.getSingleResult();
     }
@@ -50,7 +50,7 @@ public class CoordinatoreDAO implements CoordinatoreRemote {
      */
     @Override
     public List<Coordinatore> trovaCoordinatoriCorsoLaurea(String nomeCorsoLaurea) {
-        TypedQuery<Coordinatore> query = emUniClass.createQuery(Coordinatore.TROVA_COORDINATORE_CORSOLAUREA, Coordinatore.class);
+        final TypedQuery<Coordinatore> query = emUniClass.createQuery(Coordinatore.TROVA_COORDINATORE_CORSOLAUREA, Coordinatore.class);
         query.setParameter("nomeCorsoLaurea", nomeCorsoLaurea);
         return query.getResultList();
     }
@@ -62,7 +62,7 @@ public class CoordinatoreDAO implements CoordinatoreRemote {
      */
     @Override
     public List<Coordinatore> trovaTutti() {
-        TypedQuery<Coordinatore> query = emUniClass.createNamedQuery(Coordinatore.TROVA_TUTTI, Coordinatore.class);
+        final TypedQuery<Coordinatore> query = emUniClass.createNamedQuery(Coordinatore.TROVA_TUTTI, Coordinatore.class);
         return query.getResultList();
     }
 

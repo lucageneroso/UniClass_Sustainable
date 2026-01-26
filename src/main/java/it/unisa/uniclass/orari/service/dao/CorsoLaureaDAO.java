@@ -24,7 +24,7 @@ public class CorsoLaureaDAO implements CorsoLaureaRemote {
      */
     @Override
     public CorsoLaurea trovaCorsoLaurea(long id) {
-        TypedQuery<CorsoLaurea> query = emUniClass.createNamedQuery(CorsoLaurea.TROVA_CORSOLAUREA, CorsoLaurea.class);
+        final TypedQuery<CorsoLaurea> query = emUniClass.createNamedQuery(CorsoLaurea.TROVA_CORSOLAUREA, CorsoLaurea.class);
         query.setParameter("id", id);
         return query.getSingleResult();
     }
@@ -37,7 +37,7 @@ public class CorsoLaureaDAO implements CorsoLaureaRemote {
      */
     @Override
     public CorsoLaurea trovaCorsoLaurea(String nome) {
-        TypedQuery<CorsoLaurea> query = emUniClass.createNamedQuery(CorsoLaurea.TROVA_CORSOLAUREA_NOME, CorsoLaurea.class);
+        final TypedQuery<CorsoLaurea> query = emUniClass.createNamedQuery(CorsoLaurea.TROVA_CORSOLAUREA_NOME, CorsoLaurea.class);
         query.setParameter("nome", nome);
         return query.getSingleResult();
     }
@@ -49,7 +49,7 @@ public class CorsoLaureaDAO implements CorsoLaureaRemote {
      */
     @Override
     public List<CorsoLaurea> trovaTutti() {
-        TypedQuery<CorsoLaurea> query = emUniClass.createNamedQuery(CorsoLaurea.TROVA_TUTTI, CorsoLaurea.class);
+        final TypedQuery<CorsoLaurea> query = emUniClass.createNamedQuery(CorsoLaurea.TROVA_TUTTI, CorsoLaurea.class);
         return query.getResultList();
     }
 

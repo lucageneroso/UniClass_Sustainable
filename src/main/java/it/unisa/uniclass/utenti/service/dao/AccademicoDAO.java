@@ -15,7 +15,7 @@ public class AccademicoDAO implements AccademicoRemote {
     @Override
     public Accademico trovaAccademicoUniClass(String matricola){
         try {
-            TypedQuery<Accademico> query = emUniclass.createNamedQuery(Accademico.TROVA_ACCADEMICO, Accademico.class);
+            final TypedQuery<Accademico> query = emUniclass.createNamedQuery(Accademico.TROVA_ACCADEMICO, Accademico.class);
             query.setParameter("matricola", matricola);
             return query.getSingleResult();
         } catch (jakarta.persistence.PersistenceException e) {
@@ -25,14 +25,14 @@ public class AccademicoDAO implements AccademicoRemote {
 
     @Override
     public List<Accademico> trovaTuttiUniClass() {
-        TypedQuery<Accademico> query = emUniclass.createNamedQuery(Accademico.TROVA_TUTTI, Accademico.class);
+        final TypedQuery<Accademico> query = emUniclass.createNamedQuery(Accademico.TROVA_TUTTI, Accademico.class);
         return query.getResultList();
     }
 
     @Override
     public Accademico trovaEmailUniClass(String email) {
         try {
-            TypedQuery<Accademico> query = emUniclass.createNamedQuery(Accademico.TROVA_EMAIL, Accademico.class);
+            final TypedQuery<Accademico> query = emUniclass.createNamedQuery(Accademico.TROVA_EMAIL, Accademico.class);
             query.setParameter("email", email);
             return query.getSingleResult();
         } catch (jakarta.persistence.NoResultException e) {
@@ -42,7 +42,7 @@ public class AccademicoDAO implements AccademicoRemote {
 
     @Override
     public List<Accademico> trovaAttivati(boolean attivazione) {
-        TypedQuery<Accademico> query = emUniclass.createNamedQuery(Accademico.TROVA_ATTIVATI, Accademico.class);
+        final TypedQuery<Accademico> query = emUniclass.createNamedQuery(Accademico.TROVA_ATTIVATI, Accademico.class);
         query.setParameter("attivato", attivazione);
         return query.getResultList();
     }
@@ -61,7 +61,7 @@ public class AccademicoDAO implements AccademicoRemote {
 
     @Override
     public List<String> retrieveEmail() {
-        TypedQuery<String> query = emUniclass.createNamedQuery(Accademico.RETRIEVE_EMAIL, String.class);
+        final TypedQuery<String> query = emUniclass.createNamedQuery(Accademico.RETRIEVE_EMAIL, String.class);
         return query.getResultList();
     }
 

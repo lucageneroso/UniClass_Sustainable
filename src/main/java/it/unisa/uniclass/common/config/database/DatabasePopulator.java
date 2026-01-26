@@ -51,23 +51,24 @@ public class DatabasePopulator {
     }
 
     public void popolaDBUniClass() {
+
         // Creazione del corso di laurea
-        CorsoLaurea corsoLaurea = new CorsoLaurea();
+        final CorsoLaurea corsoLaurea = new CorsoLaurea();
         corsoLaurea.setNome(CORSO_INFORMATICA);
 
-        CorsoLaurea corsoLaurea2 = new CorsoLaurea();
+        final CorsoLaurea corsoLaurea2 = new CorsoLaurea();
         corsoLaurea2.setNome("Fisica");
 
-        // Creazione dei resti e associazione con il corso di laurea
-        Resto resto = new Resto();
+        // Creazione dei resti
+        final Resto resto = new Resto();
         resto.setNome("Resto 0");
         resto.setCorsoLaurea(corsoLaurea);
 
-        Resto resto2 = new Resto();
+        final Resto resto2 = new Resto();
         resto2.setNome("Resto 1");
         resto2.setCorsoLaurea(corsoLaurea);
 
-        Resto resto3 = new Resto();
+        final Resto resto3 = new Resto();
         resto3.setNome("Resto 2");
         resto3.setCorsoLaurea(corsoLaurea);
 
@@ -75,10 +76,10 @@ public class DatabasePopulator {
         corsoLaurea.getResti().add(resto2);
         corsoLaurea.getResti().add(resto3);
 
-        // Creazione degli anni didattici
-        AnnoDidattico anno1 = new AnnoDidattico("Anno 1");
-        AnnoDidattico anno2 = new AnnoDidattico("Anno 2");
-        AnnoDidattico anno3 = new AnnoDidattico("Anno 3");
+        // Anni didattici
+        final AnnoDidattico anno1 = new AnnoDidattico("Anno 1");
+        final AnnoDidattico anno2 = new AnnoDidattico("Anno 2");
+        final AnnoDidattico anno3 = new AnnoDidattico("Anno 3");
 
         corsoLaurea.getAnniDidattici().add(anno1);
         corsoLaurea.getAnniDidattici().add(anno2);
@@ -88,12 +89,14 @@ public class DatabasePopulator {
         anno2.getCorsiLaurea().add(corsoLaurea);
         anno3.getCorsiLaurea().add(corsoLaurea);
 
-        // Creazione corsi
-        Corso corso1 = new Corso();
+        // Corsi
+        final Corso corso1 = new Corso();
         corso1.setNome("Ingegneria del Software");
-        Corso corso2 = new Corso();
+
+        final Corso corso2 = new Corso();
         corso2.setNome("Fondamenti di Intelligenza Artificiale");
-        Corso corso3 = new Corso();
+
+        final Corso corso3 = new Corso();
         corso3.setNome("Programmazione Distribuita");
 
         corso1.setCorsoLaurea(corsoLaurea);
@@ -113,7 +116,7 @@ public class DatabasePopulator {
         anno3.getCorsi().add(corso3);
 
         // Lezioni
-        Lezione lezione1 = new Lezione();
+        final Lezione lezione1 = new Lezione();
         lezione1.setCorso(corso1);
         lezione1.setGiorno(Giorno.LUNEDI);
         lezione1.setResto(resto);
@@ -121,7 +124,7 @@ public class DatabasePopulator {
         lezione1.setOraFine(Time.valueOf(TIME_1400));
         lezione1.setSemestre(1);
 
-        Lezione lezione2 = new Lezione();
+        final Lezione lezione2 = new Lezione();
         lezione2.setCorso(corso1);
         lezione2.setGiorno(Giorno.GIOVEDI);
         lezione2.setResto(resto);
@@ -129,7 +132,7 @@ public class DatabasePopulator {
         lezione2.setOraFine(Time.valueOf(TIME_1100));
         lezione2.setSemestre(1);
 
-        Lezione lezione3 = new Lezione();
+        final Lezione lezione3 = new Lezione();
         lezione3.setCorso(corso1);
         lezione3.setGiorno(Giorno.VENERDI);
         lezione3.setResto(resto);
@@ -137,7 +140,7 @@ public class DatabasePopulator {
         lezione3.setOraFine(Time.valueOf(TIME_1300));
         lezione3.setSemestre(1);
 
-        Lezione lezione4 = new Lezione();
+        final Lezione lezione4 = new Lezione();
         lezione4.setCorso(corso2);
         lezione4.setGiorno(Giorno.MARTEDI);
         lezione4.setResto(resto);
@@ -145,7 +148,7 @@ public class DatabasePopulator {
         lezione4.setOraFine(Time.valueOf(TIME_1530));
         lezione4.setSemestre(1);
 
-        Lezione lezione5 = new Lezione();
+        final Lezione lezione5 = new Lezione();
         lezione5.setCorso(corso2);
         lezione5.setGiorno(Giorno.GIOVEDI);
         lezione5.setResto(resto);
@@ -153,32 +156,32 @@ public class DatabasePopulator {
         lezione5.setOraFine(Time.valueOf(TIME_1530));
         lezione5.setSemestre(1);
 
-        Lezione lezione6 = new Lezione();
+        final Lezione lezione6 = new Lezione();
         lezione6.setCorso(corso3);
         lezione6.setGiorno(Giorno.LUNEDI);
         lezione6.setResto(resto);
-        lezione6.setOraInizio(Time.valueOf("14:30:00")); // non segnalato da SonarQube
+        lezione6.setOraInizio(Time.valueOf("14:30:00"));
         lezione6.setOraFine(Time.valueOf(TIME_1730));
         lezione6.setSemestre(1);
 
-        // Creazione delle aule
-        Aula aulaF1 = new Aula();
+        // Aule
+        final Aula aulaF1 = new Aula();
         aulaF1.setNome("F1");
         aulaF1.setEdificio("F");
 
-        Aula aulaF2 = new Aula();
+        final Aula aulaF2 = new Aula();
         aulaF2.setNome("F2");
         aulaF2.setEdificio("F");
 
-        Aula aulaF3 = new Aula();
+        final Aula aulaF3 = new Aula();
         aulaF3.setNome("F3");
         aulaF3.setEdificio("F");
 
-        Aula aulaP1 = new Aula();
+        final Aula aulaP1 = new Aula();
         aulaP1.setNome("P1");
         aulaP1.setEdificio("P");
 
-        Aula aulaP2 = new Aula();
+        final Aula aulaP2 = new Aula();
         aulaP2.setNome("P2");
         aulaP2.setEdificio("P");
 
@@ -213,9 +216,11 @@ public class DatabasePopulator {
         em.persist(lezione4);
         em.persist(lezione5);
         em.persist(lezione6);
+
         em.flush();
         em.clear();
     }
+
 
     public void popolaDBUniversity() {
         // Metodo lasciato vuoto intenzionalmente per futuri sviluppi

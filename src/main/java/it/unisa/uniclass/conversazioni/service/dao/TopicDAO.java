@@ -24,7 +24,7 @@ public class TopicDAO implements TopicRemote {
      */
     @Override
     public Topic trovaId(long id) {
-        TypedQuery<Topic> query = emUniClass.createNamedQuery(Topic.TROVA_ID, Topic.class);
+        final TypedQuery<Topic> query = emUniClass.createNamedQuery(Topic.TROVA_ID, Topic.class);
         query.setParameter("id", id);
         return query.getSingleResult();
     }
@@ -37,7 +37,7 @@ public class TopicDAO implements TopicRemote {
      */
     @Override
     public Topic trovaNome(String nome) {
-        TypedQuery<Topic> query = emUniClass.createNamedQuery(Topic.TROVA_NOME, Topic.class);
+        final TypedQuery<Topic> query = emUniClass.createNamedQuery(Topic.TROVA_NOME, Topic.class);
         query.setParameter("nome", nome);
         return query.getSingleResult();
     }
@@ -50,7 +50,7 @@ public class TopicDAO implements TopicRemote {
      */
     @Override
     public Topic trovaCorsoLaurea(String nome) {
-        TypedQuery<Topic> query = emUniClass.createNamedQuery(Topic.TROVA_CORSOLAUREA, Topic.class);
+        final TypedQuery<Topic> query = emUniClass.createNamedQuery(Topic.TROVA_CORSOLAUREA, Topic.class);
         query.setParameter("nome", nome);
         return query.getSingleResult();
     }
@@ -63,7 +63,7 @@ public class TopicDAO implements TopicRemote {
      */
     @Override
     public Topic trovaCorso(String nome) {
-        TypedQuery<Topic> query = emUniClass.createNamedQuery(Topic.TROVA_CORSO, Topic.class);
+        final TypedQuery<Topic> query = emUniClass.createNamedQuery(Topic.TROVA_CORSO, Topic.class);
         query.setParameter("nome", nome);
         return query.getSingleResult();
     }
@@ -75,7 +75,7 @@ public class TopicDAO implements TopicRemote {
      */
     @Override
     public List<Topic> trovaTutti() {
-        TypedQuery<Topic> query = emUniClass.createNamedQuery(Topic.TROVA_TUTTI, Topic.class);
+        final TypedQuery<Topic> query = emUniClass.createNamedQuery(Topic.TROVA_TUTTI, Topic.class);
         return query.getResultList();
     }
 

@@ -11,18 +11,19 @@ import java.io.IOException;
 public class HomeRedirectFilter implements Filter {
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    // Aggiunto 'final' al parametro
+    public void init(final FilterConfig filterConfig) throws ServletException {
         Filter.super.init(filterConfig);
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
-        HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
+    // Aggiunto 'final' ai parametri e alle variabili locali
+    public void doFilter(final ServletRequest servletRequest, final ServletResponse servletResponse, final FilterChain filterChain) throws IOException, ServletException {
+        final HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
+        final HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
 
         httpResponse.sendRedirect(httpRequest.getContextPath() + "/Home");
-
-        return;
+        // return; -> Rimosso perché ridondante (Code Smell java:S1128)
     }
 
     @Override

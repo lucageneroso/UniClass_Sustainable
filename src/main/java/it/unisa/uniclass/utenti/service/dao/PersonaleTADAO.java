@@ -24,7 +24,7 @@ public class PersonaleTADAO implements PersonaleTARemote {
      */
     @Override
     public PersonaleTA trovaPersonale(long id) {
-        TypedQuery<PersonaleTA> query = emUniClass.createNamedQuery(PersonaleTA.TROVA_PERSONALE, PersonaleTA.class);
+        final TypedQuery<PersonaleTA> query = emUniClass.createNamedQuery(PersonaleTA.TROVA_PERSONALE, PersonaleTA.class);
         query.setParameter("id", id);
         return (PersonaleTA) query.getSingleResult();
     }
@@ -36,7 +36,7 @@ public class PersonaleTADAO implements PersonaleTARemote {
      */
     @Override
     public List<PersonaleTA> trovaTutti() {
-        TypedQuery<PersonaleTA> query = emUniClass.createNamedQuery(PersonaleTA.TROVA_TUTTI, PersonaleTA.class);
+        final TypedQuery<PersonaleTA> query = emUniClass.createNamedQuery(PersonaleTA.TROVA_TUTTI, PersonaleTA.class);
         return query.getResultList();
     }
 
@@ -49,7 +49,7 @@ public class PersonaleTADAO implements PersonaleTARemote {
     @Override
     public PersonaleTA trovaEmail(String email) {
         try {
-            TypedQuery<PersonaleTA> query = emUniClass.createNamedQuery(PersonaleTA.TROVA_EMAIL, PersonaleTA.class);
+            final TypedQuery<PersonaleTA> query = emUniClass.createNamedQuery(PersonaleTA.TROVA_EMAIL, PersonaleTA.class);
             query.setParameter("email", email);
             return query.getSingleResult();
         } catch (jakarta.persistence.NoResultException e) {
@@ -67,7 +67,7 @@ public class PersonaleTADAO implements PersonaleTARemote {
     @Override
     public PersonaleTA trovaEmailPassword(String email, String password) {
         try {
-            TypedQuery<PersonaleTA> query = emUniClass.createNamedQuery(PersonaleTA.TROVA_EMAIL_PASSWORD, PersonaleTA.class);
+            final TypedQuery<PersonaleTA> query = emUniClass.createNamedQuery(PersonaleTA.TROVA_EMAIL_PASSWORD, PersonaleTA.class);
             query.setParameter("email", email);
             query.setParameter("password", password);
             return query.getSingleResult();

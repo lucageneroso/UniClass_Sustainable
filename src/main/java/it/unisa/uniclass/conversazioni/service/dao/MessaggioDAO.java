@@ -26,28 +26,28 @@ public class MessaggioDAO implements MessaggioRemote {
     @Override
     public Messaggio trovaMessaggio(long id) {
         //@ assume emUniClass != null; //NOSONAR
-        TypedQuery<Messaggio> query = emUniClass.createNamedQuery(Messaggio.TROVA_MESSAGGIO, Messaggio.class);
+        final TypedQuery<Messaggio> query = emUniClass.createNamedQuery(Messaggio.TROVA_MESSAGGIO, Messaggio.class);
         query.setParameter("id", id);
         return query.getSingleResult();
     }
 
     @Override
     public List<Messaggio> trovaMessaggiInviati(String matricola) {
-        TypedQuery<Messaggio> query = emUniClass.createNamedQuery(Messaggio.TROVA_MESSAGGI_INVIATI, Messaggio.class);
+        final TypedQuery<Messaggio> query = emUniClass.createNamedQuery(Messaggio.TROVA_MESSAGGI_INVIATI, Messaggio.class);
         query.setParameter("matricola", matricola);
         return query.getResultList();
     }
 
     @Override
     public List<Messaggio> trovaMessaggiRicevuti(String matricola) {
-        TypedQuery<Messaggio> query = emUniClass.createNamedQuery(Messaggio.TROVA_MESSAGGI_RICEVUTI, Messaggio.class);
+        final TypedQuery<Messaggio> query = emUniClass.createNamedQuery(Messaggio.TROVA_MESSAGGI_RICEVUTI, Messaggio.class);
         query.setParameter("matricola", matricola);
         return query.getResultList();
     }
 
     @Override
     public List<Messaggio> trovaMessaggi(String matricola1, String matricola2) {
-        TypedQuery<Messaggio> query = emUniClass.createNamedQuery(Messaggio.TROVA_MESSAGGI_MESSAGGERI, Messaggio.class);
+        final TypedQuery<Messaggio> query = emUniClass.createNamedQuery(Messaggio.TROVA_MESSAGGI_MESSAGGERI, Messaggio.class);
         query.setParameter("autore", matricola1);
         query.setParameter("destinatario", matricola2);
         return query.getResultList();
@@ -55,33 +55,33 @@ public class MessaggioDAO implements MessaggioRemote {
 
     @Override
     public List<Messaggio> trovaTutti() {
-        TypedQuery<Messaggio> query = emUniClass.createNamedQuery(Messaggio.TROVA_TUTTI, Messaggio.class);
+        final TypedQuery<Messaggio> query = emUniClass.createNamedQuery(Messaggio.TROVA_TUTTI, Messaggio.class);
         return query.getResultList();
     }
 
     @Override
     public List<Messaggio> trovaAvvisi() {
-        TypedQuery<Messaggio> query = emUniClass.createNamedQuery(Messaggio.TROVA_AVVISI, Messaggio.class);
+        final TypedQuery<Messaggio> query = emUniClass.createNamedQuery(Messaggio.TROVA_AVVISI, Messaggio.class);
         return query.getResultList();
     }
 
     @Override
     public List<Messaggio> trovaAvvisiAutore(String autore) {
-        TypedQuery<Messaggio> query = emUniClass.createNamedQuery(Messaggio.TROVA_AVVISI_AUTORE, Messaggio.class);
+        final TypedQuery<Messaggio> query = emUniClass.createNamedQuery(Messaggio.TROVA_AVVISI_AUTORE, Messaggio.class);
         query.setParameter("autore", autore);
         return query.getResultList();
     }
 
     @Override
-    public List<Messaggio> trovaMessaggiData(LocalDateTime dateTime) {
-        TypedQuery<Messaggio> query = emUniClass.createNamedQuery(Messaggio.TROVA_MESSAGGI_DATA, Messaggio.class);
+    public List<Messaggio> trovaMessaggiData(final LocalDateTime dateTime) {
+        final TypedQuery<Messaggio> query = emUniClass.createNamedQuery(Messaggio.TROVA_MESSAGGI_DATA, Messaggio.class);
         query.setParameter("dateTime", dateTime);
         return query.getResultList();
     }
 
     @Override
     public List<Messaggio> trovaTopic(Topic topic) {
-        TypedQuery<Messaggio> query = emUniClass.createNamedQuery(Messaggio.TROVA_TOPIC, Messaggio.class);
+        final TypedQuery<Messaggio> query = emUniClass.createNamedQuery(Messaggio.TROVA_TOPIC, Messaggio.class);
         query.setParameter("topic", topic);
         return query.getResultList();
     }
