@@ -57,7 +57,7 @@ public class AnnoDidattico implements Serializable {
      * */
     //@ spec_public
     //@ nullable
-    private String anno; //Esempio: "Anno 1", "Anno 2", ecc..
+     private String anno; //Esempio: "Anno 1", "Anno 2", ecc..
 
     /**
      * Lista di corsi di laurea associati a questo anno didattico.

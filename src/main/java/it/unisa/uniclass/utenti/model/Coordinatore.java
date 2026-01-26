@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import static it.unisa.uniclass.utenti.model.Coordinatore.*;
 
 /**
  * Classe che rappresenta un Coordinatore nel sistema.

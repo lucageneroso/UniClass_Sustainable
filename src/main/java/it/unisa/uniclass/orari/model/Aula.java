@@ -64,7 +64,7 @@ public class Aula implements Serializable {
      * */
     //@ spec_public
     //@ nullable
-    private String edificio;
+     private String edificio;
     /**
      * Nome dell'Aula
      * */
