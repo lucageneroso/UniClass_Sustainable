@@ -1,25 +1,16 @@
 name: Analisi Statica SonarCloud
 
 on:
-  push:
-    # Si avvia su push per feedback immediato E dopo un merge nei branch principali
-    branches: 
-      - main
-      - develop
-      - lucagen  
-      - prototype
   pull_request:
-    types: [opened, synchronize, reopened]
+    branches: [main, develop] # Inutile scansionare ogni push su branch privati
     # Si avvia solo quando si cerca di unire il codice in questi branch
-    branches: 
-      - main
-      - develop
-      - prototype
-      - lucagen
+   
     
 jobs:
   sonar_analysis:
     runs-on: ubuntu-latest
+    env:
+      ELECTRICITYMAPS_API_KEY: ${{ secrets.ELECTRICITYMAPS_API_KEY }}
     
     steps:
       - name: Checkout del codice (con fetch-depth 0)
@@ -27,6 +18,11 @@ jobs:
         with:
           # Necessario per l'analisi differenziale (solo codice modificato) di SonarCloud
           fetch-depth: 0 
+
+      - name: Start Eco-CI Energy Measurement
+        uses: green-coding-solutions/eco-ci-energy-estimation@v4
+        with:
+          task: start-measurement
           
       - name: Setup Java 21
         uses: actions/setup-java@v4
@@ -49,3 +45,14 @@ jobs:
           SONAR_PROJECT_KEY: JakartaDependent_UniClass-Dependability
           
           SONAR_ORGANIZATION: jakartadependent
+
+      - name: Measure Build Energy
+        uses: green-coding-solutions/eco-ci-energy-estimation@v4
+        with:
+          task: get-measurement
+          label: 'Security Scan'
+
+      - name: Final Energy & CO2 Report^
+        uses: green-coding-solutions/eco-ci-energy-estimation@v4
+        with:
+          task: display-results
