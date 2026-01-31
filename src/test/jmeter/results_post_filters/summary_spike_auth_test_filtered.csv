@@ -1,0 +1,5 @@
+Label,# Samples,Average,Min,Max,Std. Dev.,Error %,Throughput,Received KB/sec,Sent KB/sec,Avg. Bytes
+GET Login Page,3350,1462,1,5132,1852.62,0.000%,52.54572,135.16,7.65,2634.0
+POST Login - Credenziali Valide,3300,3834,5,12348,3217.13,0.000%,49.27506,138.73,26.75,2883.0
+POST Login - Credenziali Errate,3067,4156,5,12930,3273.52,0.000%,45.86443,129.13,24.50,2883.0
+TOTAL,9717,3118,1,12930,3088.61,0.000%,144.96062,395.97,58.44,2797.2
