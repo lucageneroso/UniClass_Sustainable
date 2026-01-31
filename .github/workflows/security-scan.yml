@@ -33,18 +33,6 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: Debug GG_API_KEY
-        run: |
-          if [ -z "$GG_API_KEY" ]; then
-            echo "GG_API_KEY is NOT set"
-            exit 1
-          else
-            echo "GG_API_KEY is set"
-            fi
-        env:
-          GG_API_KEY: ${{ secrets.GG_API_KEY }}
-
-
       - name: Compilazione e Installazione (Senza Esecuzione Test)
         # CORREZIONE: Rimosso -Dmaven.main.skip=true. 
         # Ora compila correttamente src/main/java rendendo le classi visibili.
