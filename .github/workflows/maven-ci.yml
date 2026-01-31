@@ -2,16 +2,14 @@ name: Java CI con Maven
 
 on:
   push:
-    # Si avvia su push per feedback immediato E dopo un merge nei branch principali
-    branches: 
+    branches:
       - main
       - develop
-      - lucagen  
+      - lucagen
       - prototype
   pull_request:
     types: [opened, synchronize, reopened]
-    # Si avvia solo quando si cerca di unire il codice in questi branch
-    branches: 
+    branches:
       - main
       - develop
       - prototype
@@ -21,12 +19,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    #  Variabile d’ambiente per Eco-CI (CO₂)
+    env:
+      ELECTRICITYMAPS_API_KEY: ${{ secrets.ELECTRICITYMAPS_API_KEY }}
+
     steps:
     - name: Checkout del codice
       uses: actions/checkout@v4
 
-      # 1. INIZIALIZZA ECO-CI
-    - name: Initialize Eco-CI
+    #  1. AVVIO MISURAZIONE ECO-CI
+    - name: Start Eco-CI Energy Measurement
       uses: green-coding-solutions/eco-ci-energy-estimation@v4
       with:
         task: start-measurement
@@ -36,35 +38,33 @@ jobs:
       with:
         java-version: '21'
         distribution: 'temurin'
-        cache: 'maven' 
+        cache: 'maven'
 
     - name: Build, Test ed Esecuzione LoginServletTest
-      # Questo comando esegue il build e i 7 test che hai trovato
-      run: mvn -B clean package --file pom.xml 
+      run: mvn -B clean package --file pom.xml
 
     - name: Upload del JAR/WAR di Build (Artefatto)
       uses: actions/upload-artifact@v4
       with:
         name: uni-class-build
-        # Verifica questo path. Adattalo se necessario (es. solo target/*.jar)
         path: target/UniClass-Dependability.war
 
-    # 2. MISURA IL CONSUMO DOPO IL BUILD
+    # 2. STOP MISURAZIONE + RACCOLTA DATI
     - name: Measure Build Energy
       uses: green-coding-solutions/eco-ci-energy-estimation@v4
       with:
         task: get-measurement
         label: 'Maven Build & Test'
 
-    # 3. MOSTRA IL REPORT FINALE
-    - name: Final Energy Report
+    #  3. REPORT FINALE (ENERGIA + CO₂)
+    - name: Final Energy & CO2 Report
       uses: green-coding-solutions/eco-ci-energy-estimation@v4
       with:
         task: display-results
 
     - name: Upload Report Coverage (JaCoCo)
+      if: always()
       uses: actions/upload-artifact@v4
-      if: always() # Esegui anche se i test falliscono
       with:
         name: coverage-report
         path: target/site/jacoco/
