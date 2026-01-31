@@ -2,18 +2,15 @@ name: Java CI con Maven
 
 on:
   push:
-    branches:
-      - main
-      - develop
-      - lucagen
-      - prototype
+    branches: [main, develop] # Ridotto il numero di branch trigger
+    paths-ignore: ['**.pdf', '**.md', 'Report/**'] # Non consumare energia per modifiche ai documenti
   pull_request:
-    types: [opened, synchronize, reopened]
-    branches:
-      - main
-      - develop
-      - prototype
-      - lucagen
+    branches: [main, develop]
+
+# OTTIMIZZAZIONE CHIAVE: Annulla i job precedenti se ne parte uno nuovo sullo stesso branch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
