@@ -1,6 +1,7 @@
 name: Sicurezza Snyk + GitGuardian
 
 on:
+  push: 
   pull_request:
     branches: [main, develop] # Inutile scansionare ogni push su branch privati
 
