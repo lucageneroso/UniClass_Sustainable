@@ -1,6 +1,8 @@
 name: Analisi Statica SonarCloud
-
 on:
+  push:
+    branches: [main, develop] # Ridotto il numero di branch trigger
+    paths-ignore: ['**.pdf', '**.md', 'Report/**'] # Non consumare energia per modifiche ai documenti
   pull_request:
     branches: [main, develop] # Inutile scansionare ogni push su branch privati
     # Si avvia solo quando si cerca di unire il codice in questi branch
