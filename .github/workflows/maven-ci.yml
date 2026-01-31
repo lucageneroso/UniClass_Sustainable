@@ -29,7 +29,7 @@ jobs:
     - name: Initialize Eco-CI
       uses: green-coding-solutions/eco-ci-energy-estimation@v4
       with:
-        task: initialize
+        task: start-measurement
 
     - name: Setup Java 21
       uses: actions/setup-java@v4
